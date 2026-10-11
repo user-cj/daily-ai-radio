@@ -2,6 +2,7 @@
 import argparse
 import asyncio
 from datetime import date, datetime, timedelta, timezone
+from email.utils import format_datetime
 import hashlib
 import html
 import json
@@ -12,11 +13,15 @@ import shutil
 import subprocess
 import tempfile
 from urllib.parse import urlparse
+import xml.etree.ElementTree as ET
 
 BJT = timezone(timedelta(hours=8))
 ROOT = Path(__file__).resolve().parent
 FIELDS = ('title', 'category', 'published', 'facts', 'analysis', 'chain', 'risk', 'sources')
 AUTOMATION_SPEED = 1.3
+SITE_URL = 'https://user-cj.github.io/daily-ai-radio/'
+ITUNES_NS = 'http://www.itunes.com/dtds/podcast-1.0.dtd'
+ATOM_NS = 'http://www.w3.org/2005/Atom'
 
 
 def validate(edition):
@@ -95,6 +100,43 @@ def speed_audio(source, output):
     return seconds
 
 
+def podcast_feed(history, site):
+    ET.register_namespace('itunes', ITUNES_NS)
+    ET.register_namespace('atom', ATOM_NS)
+    rss = ET.Element('rss', version='2.0')
+    channel = ET.SubElement(rss, 'channel')
+    for tag, value in {
+        'title': '硬件学长 · AI财经广播',
+        'link': SITE_URL,
+        'description': '每日五条有日期、有官方原文的普通话男声简报。音频已为1.3倍速，播放器请选择1倍。自动稿待人工复核。',
+        'language': 'zh-cn',
+        f'{{{ITUNES_NS}}}author': '硬件学长',
+        f'{{{ITUNES_NS}}}explicit': 'false',
+        f'{{{ITUNES_NS}}}type': 'episodic',
+    }.items():
+        ET.SubElement(channel, tag).text = value
+    ET.SubElement(channel, f'{{{ATOM_NS}}}link', href=SITE_URL + 'podcast.xml', rel='self', type='application/rss+xml')
+    ET.SubElement(channel, f'{{{ITUNES_NS}}}image', href=SITE_URL + 'podcast-cover.png')
+    ET.SubElement(channel, f'{{{ITUNES_NS}}}category', text='News')
+    for entry in history:
+        # Each episode has its own immutable audio URL, never latest.mp3.
+        audio = entry.get('podcast_audio')
+        if not audio:
+            continue
+        asset = site / audio
+        item = ET.SubElement(channel, 'item')
+        ET.SubElement(item, 'title').text = f"{entry['date']} · 每日五条（1.3倍版）"
+        ET.SubElement(item, 'link').text = SITE_URL + entry['page']
+        ET.SubElement(item, 'description').text = entry['intro'] + '\n' + entry['review']
+        ET.SubElement(item, 'guid', isPermaLink='false').text = 'daily-ai-radio:' + Path(audio).stem
+        ET.SubElement(item, 'pubDate').text = format_datetime(datetime.fromisoformat(entry['podcast_published_at']))
+        ET.SubElement(item, 'enclosure', url=SITE_URL + audio, length=str(asset.stat().st_size), type='audio/mpeg')
+        ET.SubElement(item, f'{{{ITUNES_NS}}}duration').text = str(round(entry['podcast_duration_seconds']))
+        ET.SubElement(item, f'{{{ITUNES_NS}}}explicit').text = 'false'
+        ET.SubElement(item, f'{{{ITUNES_NS}}}episodeType').text = 'full'
+    return ET.tostring(rss, encoding='utf-8', xml_declaration=True)
+
+
 def render(edition, history, duration):
     esc = html.escape
     cards = []
@@ -140,12 +182,21 @@ def build(input_path, site):
         (stage / edition['transcript']).write_text(transcript(edition), encoding='utf-8')
         history_path = stage / 'episodes.json'
         history = json.loads(history_path.read_text(encoding='utf-8')) if history_path.exists() else []
+        existing = next((e for e in history if e['date'] == edition['date']), {})
+        podcast_audio = f'audio/{base}-speed13.mp3'
+        podcast_seconds = speed_audio(mp3, stage / podcast_audio)
+        edition.update(
+            podcast_audio=podcast_audio,
+            podcast_duration_seconds=round(podcast_seconds, 1),
+            podcast_published_at=existing.get('podcast_published_at', datetime.now(BJT).isoformat()),
+        )
         history = [edition] + [e for e in history if e['date'] != edition['date']]
         history.sort(key=lambda e: e['date'], reverse=True)
         history = history[:14]
         # Keep the user's existing automation URL, with its preferred speed.
         # Conversion and duration checks finish before replacing the old site.
-        automation_seconds = speed_audio(stage / history[0]['audio'], stage / 'latest.mp3')
+        shutil.copyfile(stage / history[0]['podcast_audio'], stage / 'latest.mp3')
+        automation_seconds = history[0]['podcast_duration_seconds']
         (stage / 'automation.json').write_text(json.dumps({
             'date': history[0]['date'], 'audio': 'latest.mp3',
             'speed': AUTOMATION_SPEED, 'duration_seconds': round(automation_seconds, 1),
@@ -158,15 +209,17 @@ def build(input_path, site):
             archived = render(entry, history, entry['duration_seconds'])
             (stage / entry['page']).write_text(archived.replace('<head>', '<head><base href="../">', 1), encoding='utf-8')
         (stage / 'episodes.json').write_text(json.dumps(history, ensure_ascii=False, indent=2), encoding='utf-8')
+        (stage / 'podcast.xml').write_bytes(podcast_feed(history, stage))
         (stage / 'status.json').write_text(json.dumps({'ok': True, 'attempted_at': datetime.now(BJT).isoformat(), 'latest_date': edition['date']}, ensure_ascii=False), encoding='utf-8')
         (stage / '.nojekyll').touch()
-        for name in ('style.css', 'player.js', 'icon.svg', 'manifest.webmanifest', 'shortcuts.html'):
+        for name in ('style.css', 'player.js', 'icon.svg', 'manifest.webmanifest', 'shortcuts.html', 'podcast-cover.png'):
             shutil.copyfile(ROOT / 'web' / name, stage / name)
         guide = (stage / 'shortcuts.html').read_text(encoding='utf-8')
         guide = guide.replace('{{AUTO_SPEED}}', str(AUTOMATION_SPEED))
         guide = guide.replace('{{AUTO_DURATION}}', f'{int(automation_seconds // 60)}分{int(automation_seconds % 60):02d}秒')
         (stage / 'shortcuts.html').write_text(guide, encoding='utf-8')
         keep = {e[k] for e in history for k in ('audio', 'transcript', 'page')}
+        keep.update(e['podcast_audio'] for e in history if e.get('podcast_audio'))
         for folder in ('audio', 'transcripts', 'editions'):
             for asset in (stage / folder).iterdir():
                 if asset.relative_to(stage).as_posix() not in keep:

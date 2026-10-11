@@ -121,6 +121,22 @@ class PublicationSafeguards(unittest.TestCase):
             automation = json.loads((site / 'automation.json').read_text(encoding='utf-8'))
             self.assertEqual(automation['date'], history[0]['date'])
             self.assertEqual(automation['speed'], 1.3)
+            import feedparser
+            feed = feedparser.parse((site / 'podcast.xml').read_bytes())
+            self.assertFalse(feed.bozo)
+            self.assertEqual(len(feed.entries), 2)
+            self.assertIn('2026-10-11', feed.entries[0].title)
+            self.assertNotEqual(feed.entries[0].id, feed.entries[1].id)
+            self.assertNotEqual(feed.entries[0].enclosures[0].href, feed.entries[1].enclosures[0].href)
+            for entry, episode in zip(feed.entries, history):
+                enclosure = entry.enclosures[0]
+                self.assertEqual(enclosure.href, build_radio.SITE_URL + episode['podcast_audio'])
+                self.assertEqual(int(enclosure.length), (site / episode['podcast_audio']).stat().st_size)
+            with patch('mutagen.mp3.MP3', return_value=metadata), patch.object(build_radio, 'speed_audio', fake_speed):
+                build_radio.build(edition_path, site)
+            rebuilt = feedparser.parse((site / 'podcast.xml').read_bytes())
+            self.assertEqual([(e.id, e.published, e.enclosures[0].href) for e in rebuilt.entries],
+                             [(e.id, e.published, e.enclosures[0].href) for e in feed.entries])
             self.assertTrue((site / 'shortcuts.html').exists())
 
     def test_actual_audio_is_complete_at_1_3_speed(self):
@@ -138,6 +154,7 @@ class PublicationSafeguards(unittest.TestCase):
             site.mkdir()
             (site / 'latest.mp3').write_bytes(b'previous fast audio')
             (site / 'index.html').write_text('previous page')
+            (site / 'podcast.xml').write_text('previous feed')
             edition_path.write_text(json.dumps(self.edition), encoding='utf-8')
             async def fake_voice(text, output):
                 output.write_bytes(b'new audio')
@@ -148,6 +165,7 @@ class PublicationSafeguards(unittest.TestCase):
                     build_radio.build(edition_path, site)
             self.assertEqual((site / 'latest.mp3').read_bytes(), b'previous fast audio')
             self.assertEqual((site / 'index.html').read_text(), 'previous page')
+            self.assertEqual((site / 'podcast.xml').read_text(), 'previous feed')
 
     def make_evidence_fixture(self, number='195'):
         sources, items = [], []
