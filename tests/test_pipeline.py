@@ -43,6 +43,13 @@ class PublicationSafeguards(unittest.TestCase):
         with self.assertRaises(ValueError):
             build_radio.validate(self.edition)
 
+    def test_repeated_risk_cannot_pad_a_publishable_story(self):
+        source = {'id': 'S01', 'title': '公开征求意见', 'body': '正式文本与实施日期仍需公告确认。', 'publisher': '中国证监会', 'bucket': 'A股与政策', 'published': '2026-10-09'}
+        item = deepcopy(self.edition['items'][0])
+        item.update(source_id='S01', evidence=['正式文本与实施日期仍需公告确认。'], risk='正式文本与实施日期仍需公告确认。' * 4)
+        with self.assertRaisesRegex(ValueError, '重复句子'):
+            auto_news.evidence_validate({'items': [item]}, [source], date(2026,10,11), complete=False)
+
     def test_source_body_cannot_execute_html(self):
         self.edition['items'][0]['facts'] = '<script>alert(1)</script>'
         self.edition.update(audio='audio/test.mp3', transcript='transcripts/test.md', page='editions/test.html')
