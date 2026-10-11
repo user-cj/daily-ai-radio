@@ -126,7 +126,11 @@ def build(input_path, site):
         history = history[:14]
         markup = render(edition, history, duration)
         (stage / 'index.html').write_text(markup, encoding='utf-8')
-        (stage / edition['page']).write_text(markup.replace('<head>', '<head><base href="../">', 1), encoding='utf-8')
+        # Old pages must list the current retained window as well, so their
+        # archive navigation never points to editions that were pruned.
+        for entry in history:
+            archived = render(entry, history, entry['duration_seconds'])
+            (stage / entry['page']).write_text(archived.replace('<head>', '<head><base href="../">', 1), encoding='utf-8')
         (stage / 'episodes.json').write_text(json.dumps(history, ensure_ascii=False, indent=2), encoding='utf-8')
         (stage / 'status.json').write_text(json.dumps({'ok': True, 'attempted_at': datetime.now(BJT).isoformat(), 'latest_date': edition['date']}, ensure_ascii=False), encoding='utf-8')
         (stage / '.nojekyll').touch()
