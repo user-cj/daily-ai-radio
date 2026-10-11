@@ -1,15 +1,15 @@
 [
   {
-    "title": "中国证监会就《公开募集证券投资基金运作管理办法（征求意见稿）》及配套规则公开征求意见",
-    "url": "https://www.csrc.gov.cn/csrc/c100028/c7663393/content.shtml",
-    "published": "2026-10-09",
+    "title": "中国证监会召开资本市场和金融形势专家座谈会",
+    "url": "https://www.csrc.gov.cn/csrc/c100028/c7663814/content.shtml",
+    "published": "2026-10-10",
     "publisher": "中国证监会",
     "bucket": "A股与政策"
   },
   {
-    "title": "中国证监会召开资本市场和金融形势专家座谈会",
-    "url": "https://www.csrc.gov.cn/csrc/c100028/c7663814/content.shtml",
-    "published": "2026-10-10",
+    "title": "中国证监会就《公开募集证券投资基金运作管理办法（征求意见稿）》及配套规则公开征求意见",
+    "url": "https://www.csrc.gov.cn/csrc/c100028/c7663393/content.shtml",
+    "published": "2026-10-09",
     "publisher": "中国证监会",
     "bucket": "A股与政策"
   },
@@ -21,18 +21,18 @@
     "bucket": "芯片与硬件"
   },
   {
-    "title": "NVIDIA, Microsoft Kick Off a New Beginning for Windows PCs with RTX Spark and AI Agents",
-    "url": "https://blogs.nvidia.com/blog/local-ai-rtx-spark-microsoft-windows-event/",
-    "published": "2026-10-07",
-    "publisher": "英伟达官方",
-    "bucket": "芯片与硬件"
-  },
-  {
     "title": "Into the Omniverse: How Developers Turn Ideas Into Simulations With Frontier AI Agents",
     "url": "https://blogs.nvidia.com/blog/developers-simulations-frontier-ai-agents/",
     "published": "2026-10-08",
     "publisher": "英伟达官方",
     "bucket": "AI与科技前沿"
+  },
+  {
+    "title": "NVIDIA, Microsoft Kick Off a New Beginning for Windows PCs with RTX Spark and AI Agents",
+    "url": "https://blogs.nvidia.com/blog/local-ai-rtx-spark-microsoft-windows-event/",
+    "published": "2026-10-07",
+    "publisher": "英伟达官方",
+    "bucket": "芯片与硬件"
   },
   {
     "title": "Why Telecom Operators Are Building Their AI Strategy on Open Models",
