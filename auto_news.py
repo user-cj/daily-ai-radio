@@ -176,7 +176,6 @@ def collect(day, report):
         if stamp and not 0 <= (day-date.fromisoformat(stamp)).days <= 7:
             continue
         unique.setdefault(c['url'], c)
-    cache.write_text(json.dumps(list(unique.values())[:60], ensure_ascii=False, indent=2), encoding='utf-8')
     candidates = []
     with ThreadPoolExecutor(max_workers=6) as pool:
         futures = {pool.submit(article, dict(c)): c for c in list(unique.values())[:35]}
@@ -191,6 +190,11 @@ def collect(day, report):
             except Exception as exc:
                 errors.append({'source': c['url'], 'error': type(exc).__name__ + ': ' + str(exc)[:120]})
     candidates.sort(key=lambda c: (-c['priority'], c['url']))
+    fields = ('title', 'url', 'published', 'publisher', 'bucket')
+    remembered = {c['url']: {k: c[k] for k in fields} for c in unique.values() if c.get('published')}
+    remembered.update({c['url']: {k: c[k] for k in fields} for c in candidates})
+    recent = sorted(remembered.values(), key=lambda c: c['published'], reverse=True)[:60]
+    cache.write_text(json.dumps(recent, ensure_ascii=False, indent=2), encoding='utf-8')
     # Keep at least one primary-source hardware and one AI frontier item in the
     # context, rather than allowing regulatory listings to consume the prompt.
     context = []
