@@ -18,10 +18,12 @@
 1. 将完整项目上传到公开仓库根目录，含 `.github/workflows/daily-radio.yml`。不要只上传ZIP。
 2. GitHub 仓库 Settings → Pages → Source 选择 **GitHub Actions**。
 3. Actions → **Daily AI radio** → Run workflow，检查 `build`、`deploy`、`update-result` 均成功。
-4. 以 Pages 返回的实际网址为准；仓库 `user-cj/daily-ai-radio` 的预期地址是 `https://user-cj.github.io/daily-ai-radio/`。
+4. 当前已上线并通过公开访问检查：[打开电台](https://user-cj.github.io/daily-ai-radio/)。
 5. 首次打开点击播放；Safari 分享 → 添加到主屏幕。iPhone锁屏音频需要用户在真机验证，网页不自动播放。
 
 随交付包提供 `publish.ps1`（双击 `Publish.cmd`），优先使用本机登录状态；缺少账号连接时启动 GitHub 官方登录。脚本核对目标仓库权限、同步主分支、完整上传、启用 Pages、手动运行并检查首次部署。不会强制覆盖远程分支，不索取或保存密码到项目。
+
+手动运行时可勾选 `verify_automatic`，另外检查云端采集、自动编写五条、逐条复读和全新男声生成。检查节目保存在短期运行附件，公开页面保留当前编辑稿。队列中的发布任务从最新主分支开始，避免连续运行对旧版本状态产生冲突。
 
 ## 定时与通知
 

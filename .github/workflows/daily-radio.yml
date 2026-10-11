@@ -7,6 +7,11 @@ name: Daily AI radio
     # Beijing 07:50 retries a failed update; completed editions are not repeated.
     - cron: '50 23 * * *'
   workflow_dispatch:
+    inputs:
+      verify_automatic:
+        description: 'Test cloud source collection, automatic editing and new male audio without replacing the published edition'
+        type: boolean
+        default: false
   push:
     branches: [main]
     paths:
@@ -35,10 +40,13 @@ jobs:
     permissions:
       contents: write
     outputs:
-      failed: ${{ steps.generate.outcome == 'failure' }}
+      failed: ${{ steps.generate.outcome == 'failure' || steps.automatic_check.outcome == 'failure' }}
       site_available: ${{ steps.site.outputs.available }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          # Queued runs must start from current main, not an older dispatch SHA.
+          ref: main
       - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
         with:
           python-version: '3.12'
@@ -57,10 +65,12 @@ jobs:
           day = datetime.now(timezone(timedelta(hours=8))).date().isoformat()
           previous = Path('site/episodes.json')
           latest = json.loads(previous.read_text())[0]['date'] if previous.exists() else None
-          needed = not Path(f'episodes/{day}.json').exists() and latest != day
+          needed = os.environ.get('VERIFY_AUTOMATIC') == 'true' or (not Path(f'episodes/{day}.json').exists() and latest != day)
           with open(os.environ['GITHUB_OUTPUT'], 'a') as out:
               out.write(f'need_model={str(needed).lower()}\n')
           PY
+        env:
+          VERIFY_AUTOMATIC: ${{ inputs.verify_automatic }}
       - name: Restore open model cache
         if: steps.mode.outputs.need_model == 'true'
         uses: actions/cache@caa296126883cff596d87d8935842f9db880ef25 # v5
@@ -107,6 +117,11 @@ jobs:
           found=next(m for m in data['models'] if m['name']==os.environ['RADIO_MODEL'])
           assert found['digest']==os.environ['RADIO_MODEL_SHA'], 'Model tag changed; review its new manifest before updating'
           PY
+      - name: Verify cloud automatic editing and new male audio
+        id: automatic_check
+        if: inputs.verify_automatic
+        continue-on-error: true
+        run: python cloud_check.py
       - name: Generate five-story edition and male audio
         id: generate
         continue-on-error: true
