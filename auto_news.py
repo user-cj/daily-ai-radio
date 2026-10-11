@@ -206,7 +206,7 @@ intro写本期关注什么，50到100字。coverage写本期缺少的公司公�
 """
 
 
-def chat(messages, schema, model, timeout=840):
+def chat(messages, schema, model, timeout=1200):
     started = time.monotonic()
     payload = json.dumps({'model': model, 'messages': messages, 'stream': False, 'format': schema, 'think': False, 'options': {'temperature': 0, 'num_ctx': 16384, 'num_predict': 5200}}, ensure_ascii=False).encode()
     req = Request('http://127.0.0.1:11434/api/chat', data=payload, headers={'Content-Type': 'application/json'})
