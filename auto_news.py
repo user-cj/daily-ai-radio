@@ -13,6 +13,7 @@ import os
 from pathlib import Path
 import re
 import sys
+import time
 from urllib.parse import urlencode, urljoin, urlparse
 from urllib.request import Request, urlopen
 
@@ -206,10 +207,13 @@ intro写本期关注什么，50到100字。coverage写本期缺少的公司公�
 
 
 def chat(messages, schema, model, timeout=840):
+    started = time.monotonic()
     payload = json.dumps({'model': model, 'messages': messages, 'stream': False, 'format': schema, 'think': False, 'options': {'temperature': 0, 'num_ctx': 16384, 'num_predict': 5200}}, ensure_ascii=False).encode()
     req = Request('http://127.0.0.1:11434/api/chat', data=payload, headers={'Content-Type': 'application/json'})
     with urlopen(req, timeout=timeout) as response:
-        return json.loads(json.load(response)['message']['content'])
+        result = json.loads(json.load(response)['message']['content'])
+    print(f'Open-model response completed in {round(time.monotonic() - started)} seconds', flush=True)
+    return result
 
 
 def shorten_quotes(quotes):
@@ -307,6 +311,8 @@ def select_sources(sources):
                 break
     if len(picked) != 5:
         raise ValueError('可读取且栏目匹配的五条原文不足')
+    if not all(any(s['bucket'].startswith(prefix) for s in picked) for prefix in ('A股', '芯片', 'AI')):
+        raise ValueError('原文缺少A股、硬件或AI栏目；保留上一期')
     return picked
 
 
@@ -374,7 +380,7 @@ def main():
     parser.add_argument('--date', default=datetime.now(BJT).date().isoformat())
     parser.add_argument('--collect-only', action='store_true')
     parser.add_argument('--report', default='work/source-report.json')
-    parser.add_argument('--model', default=os.environ.get('RADIO_MODEL', 'qwen2.5:14b'))
+    parser.add_argument('--model', default=os.environ.get('RADIO_MODEL', 'qwen2.5:7b'))
     args = parser.parse_args()
     day = date.fromisoformat(args.date)
     if day > datetime.now(BJT).date():

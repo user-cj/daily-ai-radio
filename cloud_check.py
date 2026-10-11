@@ -25,7 +25,7 @@ def main():
     target.mkdir(parents=True, exist_ok=True)
     sources = collect(day, target / 'sources.json')
     print(f'Cloud check: {len(sources)} dated primary sources collected', flush=True)
-    edition = edit(sources, day, os.environ.get('RADIO_MODEL', 'qwen2.5:14b'))
+    edition = edit(sources, day, os.environ.get('RADIO_MODEL', 'qwen2.5:7b'))
     draft = target / 'edition.json'
     draft.write_text(json.dumps(edition, ensure_ascii=False, indent=2), encoding='utf-8')
     print('Cloud check: five stories passed evidence and text-consistency checks', flush=True)

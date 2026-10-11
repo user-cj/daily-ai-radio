@@ -29,8 +29,8 @@ permissions:
   contents: read
 
 env:
-  RADIO_MODEL: qwen2.5:14b
-  RADIO_MODEL_SHA: 7cdf5a0187d5c58cc5d369b255592f7841d1c4696d45a8c8a9489440385b22f6
+  RADIO_MODEL: qwen2.5:7b
+  RADIO_MODEL_SHA: 845dbda0ea48ed749caafd9e6037047aa19acfcfd82e704d7ca97d631a0b697e
   OLLAMA_VERSION: 0.40.2
 
 jobs:
@@ -76,7 +76,7 @@ jobs:
         uses: actions/cache@caa296126883cff596d87d8935842f9db880ef25 # v5
         with:
           path: ~/.ollama/models
-          key: radio-qwen2-5-14b-7cdf5a0187d5
+          key: radio-qwen2-5-7b-845dbda0ea48
       - name: Install and start Ollama
         if: steps.mode.outputs.need_model == 'true'
         run: |

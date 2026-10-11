@@ -2,7 +2,7 @@
 
 面向 iPhone Safari 的中文普通话男声电台。每日恰好五条，围绕 A股、芯片/电路/硬件和 AI 前沿；每条包含事实、分析、产业关联、风险、日期与原文。
 
-本项目使用公开 GitHub 仓库、GitHub Actions、GitHub Pages、开放模型 Qwen2.5 14B 和 Edge TTS。无需付费模型 API 密钥。网页和音频公开可访问；“个人电台”不代表访问受限。
+本项目使用公开 GitHub 仓库、GitHub Actions、GitHub Pages、开放模型 Qwen2.5 7B 和 Edge TTS。无需付费模型 API 密钥。网页和音频公开可访问；“个人电台”不代表访问受限。
 
 ## 当前实现
 
@@ -52,7 +52,7 @@ python -m http.server 8000 --directory site --bind 127.0.0.1
 python auto_news.py --collect-only --report work/source-report.json
 ```
 
-自动编辑需要本机 Ollama 和 `qwen2.5:14b`。这是独立开放模型，无需使用任何聊天订阅的API额度。原文、模型结果、语音均可能出错，不能替代专业核查。默认使用免费的第三方 Edge TTS 接口，服务失效时自动尝试另一种男声，两者失败则保留旧节目。
+自动编辑需要本机 Ollama 和 `qwen2.5:7b`。这是独立开放模型，无需使用任何聊天订阅的API额度。原文、模型结果、语音均可能出错，不能替代专业核查。默认使用免费的第三方 Edge TTS 接口，服务失效时自动尝试另一种男声，两者失败则保留旧节目。
 
 ## 编辑要求与资料边界
 
