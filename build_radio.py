@@ -9,12 +9,14 @@ import os
 from pathlib import Path
 import re
 import shutil
+import subprocess
 import tempfile
 from urllib.parse import urlparse
 
 BJT = timezone(timedelta(hours=8))
 ROOT = Path(__file__).resolve().parent
 FIELDS = ('title', 'category', 'published', 'facts', 'analysis', 'chain', 'risk', 'sources')
+AUTOMATION_SPEED = 1.3
 
 
 def validate(edition):
@@ -76,6 +78,23 @@ async def synthesize(text, output):
     raise RuntimeError(f'男声语音生成失败：{type(error).__name__}') from error
 
 
+def speed_audio(source, output):
+    import imageio_ffmpeg
+    from mutagen.mp3 import MP3
+    original_seconds = MP3(source).info.length
+    subprocess.run([
+        imageio_ffmpeg.get_ffmpeg_exe(), '-nostdin', '-hide_banner',
+        '-loglevel', 'error', '-y', '-i', str(source), '-vn',
+        '-af', f'atempo={AUTOMATION_SPEED}', '-c:a', 'libmp3lame',
+        '-b:a', '64k', '-map_metadata', '-1', str(output),
+    ], check=True, capture_output=True, timeout=180)
+    seconds = MP3(output).info.length
+    expected = original_seconds / AUTOMATION_SPEED
+    if output.stat().st_size < 10000 or abs(seconds - expected) > max(0.25, expected * 0.01):
+        raise ValueError('自动播放音频调速未完成，保留上一期')
+    return seconds
+
+
 def render(edition, history, duration):
     esc = html.escape
     cards = []
@@ -124,9 +143,13 @@ def build(input_path, site):
         history = [edition] + [e for e in history if e['date'] != edition['date']]
         history.sort(key=lambda e: e['date'], reverse=True)
         history = history[:14]
-        # A fixed audio URL lets iPhone automations follow each new edition.
-        # Keep the previous copy intact until the new MP3 has passed validation.
-        shutil.copyfile(stage / history[0]['audio'], stage / 'latest.mp3')
+        # Keep the user's existing automation URL, with its preferred speed.
+        # Conversion and duration checks finish before replacing the old site.
+        automation_seconds = speed_audio(stage / history[0]['audio'], stage / 'latest.mp3')
+        (stage / 'automation.json').write_text(json.dumps({
+            'date': history[0]['date'], 'audio': 'latest.mp3',
+            'speed': AUTOMATION_SPEED, 'duration_seconds': round(automation_seconds, 1),
+        }, ensure_ascii=False, indent=2), encoding='utf-8')
         markup = render(edition, history, duration)
         (stage / 'index.html').write_text(markup, encoding='utf-8')
         # Old pages must list the current retained window as well, so their
@@ -139,6 +162,10 @@ def build(input_path, site):
         (stage / '.nojekyll').touch()
         for name in ('style.css', 'player.js', 'icon.svg', 'manifest.webmanifest', 'shortcuts.html'):
             shutil.copyfile(ROOT / 'web' / name, stage / name)
+        guide = (stage / 'shortcuts.html').read_text(encoding='utf-8')
+        guide = guide.replace('{{AUTO_SPEED}}', str(AUTOMATION_SPEED))
+        guide = guide.replace('{{AUTO_DURATION}}', f'{int(automation_seconds // 60)}分{int(automation_seconds % 60):02d}秒')
+        (stage / 'shortcuts.html').write_text(guide, encoding='utf-8')
         keep = {e[k] for e in history for k in ('audio', 'transcript', 'page')}
         for folder in ('audio', 'transcripts', 'editions'):
             for asset in (stage / folder).iterdir():

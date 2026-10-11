@@ -4,6 +4,7 @@ from datetime import date
 import json
 from pathlib import Path
 import sys
+import subprocess
 from types import SimpleNamespace
 import unittest
 from unittest.mock import patch
@@ -94,6 +95,10 @@ class PublicationSafeguards(unittest.TestCase):
             output.write_bytes(text.encode('utf-8'))
             return 'zh-CN-YunyangNeural'
 
+        def fake_speed(source, output):
+            output.write_bytes(b'1.3x ' + source.read_bytes())
+            return 46.2
+
         with tempfile.TemporaryDirectory() as root:
             site = Path(root) / 'site'
             edition_path = Path(root) / 'edition.json'
@@ -102,17 +107,47 @@ class PublicationSafeguards(unittest.TestCase):
             older['intro'] = '上一期的开场。'
             edition_path.write_text(json.dumps(older), encoding='utf-8')
             metadata = SimpleNamespace(info=SimpleNamespace(length=60))
-            with patch.object(build_radio, 'synthesize', fake_voice), patch('mutagen.mp3.MP3', return_value=metadata):
+            with patch.object(build_radio, 'synthesize', fake_voice), patch('mutagen.mp3.MP3', return_value=metadata), patch.object(build_radio, 'speed_audio', fake_speed):
                 build_radio.build(edition_path, site)
-                previous_audio = (site / 'latest.mp3').read_bytes()
+                previous_audio = json.loads((site / 'episodes.json').read_text(encoding='utf-8'))[0]['audio']
+                previous_audio = (site / previous_audio).read_bytes()
                 edition_path.write_text(json.dumps(self.edition), encoding='utf-8')
                 build_radio.build(edition_path, site)
             history = json.loads((site / 'episodes.json').read_text(encoding='utf-8'))
             self.assertEqual(history[0]['date'], '2026-10-11')
-            self.assertEqual((site / 'latest.mp3').read_bytes(), (site / history[0]['audio']).read_bytes())
-            self.assertNotEqual((site / 'latest.mp3').read_bytes(), previous_audio)
+            self.assertEqual((site / 'latest.mp3').read_bytes(), b'1.3x ' + (site / history[0]['audio']).read_bytes())
+            self.assertNotEqual((site / 'latest.mp3').read_bytes(), b'1.3x ' + previous_audio)
             self.assertEqual((site / history[1]['audio']).read_bytes(), previous_audio)
+            automation = json.loads((site / 'automation.json').read_text(encoding='utf-8'))
+            self.assertEqual(automation['date'], history[0]['date'])
+            self.assertEqual(automation['speed'], 1.3)
             self.assertTrue((site / 'shortcuts.html').exists())
+
+    def test_actual_audio_is_complete_at_1_3_speed(self):
+        import imageio_ffmpeg
+        from mutagen.mp3 import MP3
+        with tempfile.TemporaryDirectory() as root:
+            source, output = Path(root) / 'source.mp3', Path(root) / 'fast.mp3'
+            subprocess.run([imageio_ffmpeg.get_ffmpeg_exe(), '-nostdin', '-loglevel', 'error', '-f', 'lavfi', '-i', 'sine=frequency=440:duration=6', '-c:a', 'libmp3lame', str(source)], check=True, capture_output=True)
+            seconds = build_radio.speed_audio(source, output)
+            self.assertAlmostEqual(seconds, MP3(source).info.length / 1.3, delta=0.12)
+
+    def test_failed_speed_conversion_keeps_previous_automation(self):
+        with tempfile.TemporaryDirectory() as root:
+            site, edition_path = Path(root) / 'site', Path(root) / 'edition.json'
+            site.mkdir()
+            (site / 'latest.mp3').write_bytes(b'previous fast audio')
+            (site / 'index.html').write_text('previous page')
+            edition_path.write_text(json.dumps(self.edition), encoding='utf-8')
+            async def fake_voice(text, output):
+                output.write_bytes(b'new audio')
+                return 'zh-CN-YunyangNeural'
+            metadata = SimpleNamespace(info=SimpleNamespace(length=60))
+            with patch.object(build_radio, 'synthesize', fake_voice), patch('mutagen.mp3.MP3', return_value=metadata), patch.object(build_radio, 'speed_audio', side_effect=RuntimeError('conversion failed')):
+                with self.assertRaises(RuntimeError):
+                    build_radio.build(edition_path, site)
+            self.assertEqual((site / 'latest.mp3').read_bytes(), b'previous fast audio')
+            self.assertEqual((site / 'index.html').read_text(), 'previous page')
 
     def make_evidence_fixture(self, number='195'):
         sources, items = [], []

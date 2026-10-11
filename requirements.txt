@@ -5,3 +5,4 @@ mutagen==1.48.1
 PyYAML==6.0.3
 pypdf==6.20.0
 truststore==0.10.4
+imageio-ffmpeg==0.6.0
