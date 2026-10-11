@@ -124,6 +124,9 @@ def build(input_path, site):
         history = [edition] + [e for e in history if e['date'] != edition['date']]
         history.sort(key=lambda e: e['date'], reverse=True)
         history = history[:14]
+        # A fixed audio URL lets iPhone automations follow each new edition.
+        # Keep the previous copy intact until the new MP3 has passed validation.
+        shutil.copyfile(stage / history[0]['audio'], stage / 'latest.mp3')
         markup = render(edition, history, duration)
         (stage / 'index.html').write_text(markup, encoding='utf-8')
         # Old pages must list the current retained window as well, so their
@@ -134,7 +137,7 @@ def build(input_path, site):
         (stage / 'episodes.json').write_text(json.dumps(history, ensure_ascii=False, indent=2), encoding='utf-8')
         (stage / 'status.json').write_text(json.dumps({'ok': True, 'attempted_at': datetime.now(BJT).isoformat(), 'latest_date': edition['date']}, ensure_ascii=False), encoding='utf-8')
         (stage / '.nojekyll').touch()
-        for name in ('style.css', 'player.js', 'icon.svg', 'manifest.webmanifest'):
+        for name in ('style.css', 'player.js', 'icon.svg', 'manifest.webmanifest', 'shortcuts.html'):
             shutil.copyfile(ROOT / 'web' / name, stage / name)
         keep = {e[k] for e in history for k in ('audio', 'transcript', 'page')}
         for folder in ('audio', 'transcripts', 'editions'):

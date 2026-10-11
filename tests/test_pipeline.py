@@ -4,6 +4,7 @@ from datetime import date
 import json
 from pathlib import Path
 import sys
+from types import SimpleNamespace
 import unittest
 from unittest.mock import patch
 import tempfile
@@ -76,6 +77,7 @@ class PublicationSafeguards(unittest.TestCase):
             site = Path(root)/'site'
             site.mkdir()
             (site/'index.html').write_text('previous edition: 2026-10-10')
+            (site/'latest.mp3').write_bytes(b'previous audio')
             edition_path = Path(root)/'edition.json'
             edition_path.write_text(json.dumps(self.edition,ensure_ascii=False),encoding='utf-8')
             async def fail_voice(*args):
@@ -84,7 +86,33 @@ class PublicationSafeguards(unittest.TestCase):
                 with self.assertRaises(RuntimeError):
                     build_radio.build(edition_path, site)
             self.assertEqual((site/'index.html').read_text(),'previous edition: 2026-10-10')
-            self.assertEqual(sorted(p.name for p in site.iterdir()),['index.html'])
+            self.assertEqual((site/'latest.mp3').read_bytes(), b'previous audio')
+            self.assertEqual(sorted(p.name for p in site.iterdir()),['index.html', 'latest.mp3'])
+
+    def test_automation_audio_follows_new_edition_and_keeps_archive(self):
+        async def fake_voice(text, output):
+            output.write_bytes(text.encode('utf-8'))
+            return 'zh-CN-YunyangNeural'
+
+        with tempfile.TemporaryDirectory() as root:
+            site = Path(root) / 'site'
+            edition_path = Path(root) / 'edition.json'
+            older = deepcopy(self.edition)
+            older['date'] = '2026-10-10'
+            older['intro'] = '上一期的开场。'
+            edition_path.write_text(json.dumps(older), encoding='utf-8')
+            metadata = SimpleNamespace(info=SimpleNamespace(length=60))
+            with patch.object(build_radio, 'synthesize', fake_voice), patch('mutagen.mp3.MP3', return_value=metadata):
+                build_radio.build(edition_path, site)
+                previous_audio = (site / 'latest.mp3').read_bytes()
+                edition_path.write_text(json.dumps(self.edition), encoding='utf-8')
+                build_radio.build(edition_path, site)
+            history = json.loads((site / 'episodes.json').read_text(encoding='utf-8'))
+            self.assertEqual(history[0]['date'], '2026-10-11')
+            self.assertEqual((site / 'latest.mp3').read_bytes(), (site / history[0]['audio']).read_bytes())
+            self.assertNotEqual((site / 'latest.mp3').read_bytes(), previous_audio)
+            self.assertEqual((site / history[1]['audio']).read_bytes(), previous_audio)
+            self.assertTrue((site / 'shortcuts.html').exists())
 
     def make_evidence_fixture(self, number='195'):
         sources, items = [], []
