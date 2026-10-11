@@ -16,6 +16,7 @@ import sys
 import time
 from urllib.parse import urlencode, urljoin, urlparse
 from urllib.request import Request, urlopen
+from urllib.error import HTTPError, URLError
 
 import truststore
 truststore.inject_into_ssl()
@@ -37,14 +38,20 @@ def fetch(url, data=None, timeout=22, limit=MAX_BYTES):
     headers = dict(HEADERS)
     if data is not None:
         headers['Content-Type'] = 'application/x-www-form-urlencoded'
-    with urlopen(Request(url, data=data, headers=headers), timeout=timeout) as response:
-        final = urlparse(response.url)
-        if final.hostname not in ALLOWED and final.hostname != '127.0.0.1':
-            raise ValueError('redirect outside source allowlist')
-        raw = response.read(limit + 1)
-        if len(raw) > limit:
-            raise ValueError('source too large')
-        return raw
+    for attempt in range(3):
+        try:
+            with urlopen(Request(url, data=data, headers=headers), timeout=timeout) as response:
+                final = urlparse(response.url)
+                if final.hostname not in ALLOWED and final.hostname != '127.0.0.1':
+                    raise ValueError('redirect outside source allowlist')
+                raw = response.read(limit + 1)
+                if len(raw) > limit:
+                    raise ValueError('source too large')
+                return raw
+        except (URLError, TimeoutError, ConnectionError) as exc:
+            if attempt == 2 or (isinstance(exc, HTTPError) and exc.code not in (429, 500, 502, 503, 504)):
+                raise
+            time.sleep(2 * (attempt + 1))
 
 
 def soup_of(raw):
@@ -151,6 +158,10 @@ def announcements(day):
 
 def collect(day, report):
     seeds, errors = [], []
+    cache = ROOT / 'source-cache.json'
+    if cache.exists():
+        # Cache only discovery metadata, then fetch every original again.
+        seeds.extend(json.loads(cache.read_text(encoding='utf-8')))
     jobs = [('证监会', csrc), ('工信部', miit), ('英伟达', lambda: rss('https://nvidianews.nvidia.com/rss.xml', '英伟达官方', 'AI与科技前沿')), ('三星', lambda: rss('https://news.samsung.com/global/feed', '三星电子官方', '芯片与硬件')), ('巨潮资讯', lambda: announcements(day))]
     with ThreadPoolExecutor(max_workers=5) as pool:
         futures = {pool.submit(job): name for name, job in jobs}
@@ -165,6 +176,7 @@ def collect(day, report):
         if stamp and not 0 <= (day-date.fromisoformat(stamp)).days <= 7:
             continue
         unique.setdefault(c['url'], c)
+    cache.write_text(json.dumps(list(unique.values())[:60], ensure_ascii=False, indent=2), encoding='utf-8')
     candidates = []
     with ThreadPoolExecutor(max_workers=6) as pool:
         futures = {pool.submit(article, dict(c)): c for c in list(unique.values())[:35]}
