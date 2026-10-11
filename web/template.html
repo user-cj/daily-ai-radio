@@ -1,0 +1,9 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="theme-color" content="#101b25"><meta name="apple-mobile-web-app-capable" content="yes"><title>硬件学长 · AI财经广播</title><link rel="icon" href="icon.svg" type="image/svg+xml"><link rel="manifest" href="manifest.webmanifest"><link rel="stylesheet" href="style.css"></head>
+<body><main><header><a class="brand" href="./"><span class="mark">◉</span> 硬件学长<span class="small">AI 财经广播</span></a><span class="pill">每日五条 · 普通话男声</span></header>
+<section class="hero"><div class="eyebrow">A 股 / 芯片与硬件 / AI 前沿</div><h1>把消息听清楚，<br>把风险放在前面。</h1><p class="lead">有日期，有原文。先讲事实，再讲影响与不确定性。</p></section>
+<section class="player"><div class="eyebrow"><span>最新一期 · {{EDITION}}</span><span>{{DURATION}}</span></div><h2 id="episode-date">{{DATE}}</h2><p id="freshness" role="status">以本期日期为准</p><audio id="radio" controls preload="metadata" playsinline src="{{AUDIO}}">浏览器不支持播放，请下载音频。</audio><div class="play-actions"><a href="{{AUDIO}}" download>下载 MP3 ↓</a><a href="{{TEXT}}">查看文字稿 ↗</a><label>语速 <select id="speed" aria-label="播放语速"><option value="0.85">0.85×</option><option value="1" selected>1×</option><option value="1.15">1.15×</option><option value="1.3">1.3×</option></select></label></div><p class="quiet">{{REVIEW}}</p></section>
+<section class="opening"><h2>本期导听</h2><p>{{INTRO}}</p></section><div class="stories">{{CARDS}}</div>
+<section class="coverage"><h2>资料覆盖与下一步观察</h2><p>{{COVERAGE}}</p><p>{{OUTRO}}</p></section>
+<details class="archive"><summary>最近 14 期</summary><ul>{{HISTORY}}</ul></details>
+<footer><p>计划每天北京时间 07:30 左右更新。更新失败时保留上一期及真实日期。</p><p>iPhone：Safari 打开后点击播放；分享 → 添加到主屏幕。锁屏播放效果以设备实测为准。</p><p>当前网页与音频可公开访问。节目用于信息学习，投资判断需自行核实。</p></footer></main><script src="player.js"></script></body></html>

@@ -1,0 +1,187 @@
+name: Daily AI radio
+
+"on":
+  schedule:
+    # Beijing 07:00 starts collection/editing, aiming for an edition near 07:30.
+    - cron: '0 23 * * *'
+    # Beijing 07:50 retries a failed update; completed editions are not repeated.
+    - cron: '50 23 * * *'
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '*.py'
+      - 'requirements.txt'
+      - 'episodes/**'
+      - 'web/**'
+      - '.github/workflows/daily-radio.yml'
+
+concurrency:
+  group: daily-radio-pages
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+env:
+  RADIO_MODEL: qwen2.5:14b
+  RADIO_MODEL_SHA: 7cdf5a0187d5c58cc5d369b255592f7841d1c4696d45a8c8a9489440385b22f6
+  OLLAMA_VERSION: 0.40.2
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 50
+    permissions:
+      contents: write
+    outputs:
+      failed: ${{ steps.generate.outcome == 'failure' }}
+      site_available: ${{ steps.site.outputs.available }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: '3.12'
+          cache: pip
+      - name: Install Python requirements
+        run: python -m pip install -r requirements.txt
+      - name: Validate the pipeline
+        run: python -m unittest discover -s tests -v
+      - name: Check whether a local model is needed
+        id: mode
+        run: |
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          from datetime import datetime, timedelta, timezone
+          day = datetime.now(timezone(timedelta(hours=8))).date().isoformat()
+          previous = Path('site/episodes.json')
+          latest = json.loads(previous.read_text())[0]['date'] if previous.exists() else None
+          needed = not Path(f'episodes/{day}.json').exists() and latest != day
+          with open(os.environ['GITHUB_OUTPUT'], 'a') as out:
+              out.write(f'need_model={str(needed).lower()}\n')
+          PY
+      - name: Restore open model cache
+        if: steps.mode.outputs.need_model == 'true'
+        uses: actions/cache@caa296126883cff596d87d8935842f9db880ef25 # v5
+        with:
+          path: ~/.ollama/models
+          key: radio-qwen2-5-14b-7cdf5a0187d5
+      - name: Install and start Ollama
+        if: steps.mode.outputs.need_model == 'true'
+        run: |
+          mkdir -p "$RUNNER_TEMP/ollama"
+          curl --fail --location --retry 3 --max-time 240 "https://github.com/ollama/ollama/releases/download/v${OLLAMA_VERSION}/ollama-linux-amd64.tar.zst" -o "$RUNNER_TEMP/ollama.tar.zst"
+          curl --fail --location --retry 3 --max-time 60 "https://github.com/ollama/ollama/releases/download/v${OLLAMA_VERSION}/sha256sum.txt" -o "$RUNNER_TEMP/ollama.sha256"
+          python - <<'PY'
+          import hashlib, os, re
+          from pathlib import Path
+          root = Path(os.environ['RUNNER_TEMP'])
+          checksum = next(line for line in (root/'ollama.sha256').read_text().splitlines() if line.split()[-1].lstrip('./*') == 'ollama-linux-amd64.tar.zst')
+          expected = checksum.split()[0]
+          actual = hashlib.file_digest(open(root/'ollama.tar.zst', 'rb'), 'sha256').hexdigest()
+          assert actual == expected, 'Ollama archive checksum mismatch'
+          PY
+          tar --zstd -xf "$RUNNER_TEMP/ollama.tar.zst" -C "$RUNNER_TEMP/ollama"
+          rm "$RUNNER_TEMP/ollama.tar.zst"
+          echo "$RUNNER_TEMP/ollama/bin" >> "$GITHUB_PATH"
+          OLLAMA_NUM_PARALLEL=1 OLLAMA_MAX_LOADED_MODELS=1 "$RUNNER_TEMP/ollama/bin/ollama" serve > "$RUNNER_TEMP/ollama.log" 2>&1 &
+          python - <<'PY'
+          import time, urllib.request
+          for attempt in range(40):
+              try:
+                  urllib.request.urlopen('http://127.0.0.1:11434/api/tags', timeout=2)
+                  break
+              except Exception:
+                  time.sleep(1)
+          else:
+              raise RuntimeError('Local open model server did not start')
+          PY
+      - name: Load and verify the model
+        if: steps.mode.outputs.need_model == 'true'
+        run: |
+          ollama pull "$RADIO_MODEL"
+          python - <<'PY'
+          import json, os, urllib.request
+          data=json.load(urllib.request.urlopen('http://127.0.0.1:11434/api/tags'))
+          found=next(m for m in data['models'] if m['name']==os.environ['RADIO_MODEL'])
+          assert found['digest']==os.environ['RADIO_MODEL_SHA'], 'Model tag changed; review its new manifest before updating'
+          PY
+      - name: Generate five-story edition and male audio
+        id: generate
+        continue-on-error: true
+        run: python auto_news.py --report work/source-report.json
+      - name: Check and persist the last usable site
+        id: site
+        if: always()
+        run: |
+          if [ -f site/index.html ]; then
+            if [ '${{ steps.generate.outcome }}' != 'success' ]; then
+              python - <<'PY'
+          import json
+          from pathlib import Path
+          from datetime import datetime, timedelta, timezone
+          history=json.loads(Path('site/episodes.json').read_text())
+          Path('site/status.json').write_text(json.dumps({'ok':False,'attempted_at':datetime.now(timezone(timedelta(hours=8))).isoformat(),'latest_date':history[0]['date'],'reason':'最近更新未完成；保留上一期。'},ensure_ascii=False))
+          PY
+            fi
+            echo 'available=true' >> "$GITHUB_OUTPUT"
+            git config user.name 'github-actions[bot]'
+            git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+            git add site
+            if ! git diff --cached --quiet; then
+              git commit -m 'Update radio edition and status'
+              git pull --rebase origin main
+              git push origin HEAD:main
+            fi
+          else
+            echo 'available=false' >> "$GITHUB_OUTPUT"
+          fi
+      - name: Save primary-source diagnostics
+        if: always()
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        with:
+          name: source-diagnostics
+          path: work/
+          retention-days: 7
+          if-no-files-found: ignore
+      - name: Upload site for Pages
+        if: always() && steps.site.outputs.available == 'true'
+        uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
+        with:
+          path: site
+
+  deploy:
+    if: always() && needs.build.outputs.site_available == 'true'
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Configure Pages
+        uses: actions/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b # v5
+      - name: Publish radio
+        id: deployment
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1
+
+  update-result:
+    if: always()
+    needs: [build, deploy]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Record final update result
+        env:
+          EDITOR_FAILED: ${{ needs.build.outputs.failed }}
+          BUILD_RESULT: ${{ needs.build.result }}
+          DEPLOY_RESULT: ${{ needs.deploy.result }}
+        run: |
+          if [ "$EDITOR_FAILED" = 'true' ] || [ "$BUILD_RESULT" != 'success' ] || [ "$DEPLOY_RESULT" != 'success' ]; then
+            echo 'Update failed or only the previous edition was published. Check source diagnostics and Actions logs.' >> "$GITHUB_STEP_SUMMARY"
+            exit 1
+          fi
+          echo 'Edition and static radio published successfully.' >> "$GITHUB_STEP_SUMMARY"

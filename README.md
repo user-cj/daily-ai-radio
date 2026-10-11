@@ -1,44 +1,68 @@
-# 硬件学长 · AI财经早报 — 私人网络电台启动包
+# 硬件学长 · AI财经广播
 
-## 已实现
-- 将人工核实的中文 `brief.md` 转为普通话男声 MP3（Edge TTS 云端语音，需联网）
-- 自动生成适合手机访问的 `site/index.html`，提供播放控件、历史节目和文字稿
-- 按北京时间命名节目，未生成新节目时保留真实旧日期，防止旧新闻冒充今日新闻
+面向 iPhone Safari 的中文普通话男声电台。每日恰好五条，围绕 A股、芯片/电路/硬件和 AI 前沿；每条包含事实、分析、产业关联、风险、日期与原文。
 
-## Windows 安装
-1. 安装 Python 3.10+，确保命令行 `python --version` 有输出。
-2. 在本目录打开 PowerShell，运行 `python -m pip install -r requirements.txt`。
-3. 用经过核实的**当天**五条新闻播报稿替换 `brief.md`（勿直接播报默认占位模板）。
-4. 执行 `python build_radio.py --input brief.md --date 2026-10-11`，日期按实际当天修改；或者双击 `run_today.bat`。
-5. 本地试听：进入 `site` 文件夹运行 `python -m http.server 8000`，电脑访问 http://localhost:8000 。
-6. 手机在同一局域网时，访问 `http://电脑局域网IP:8000`。如果打不开，检查Windows防火墙；不要把端口直接暴露到公网。
+本项目使用公开 GitHub 仓库、GitHub Actions、GitHub Pages、开放模型 Qwen2.5 14B 和 Edge TTS。无需付费模型 API 密钥。网页和音频公开可访问；“个人电台”不代表访问受限。
 
-## 让手机在外面也能听
-把 `site/` 目录发布到 Cloudflare Pages、GitHub Pages 或其他 HTTPS 静态托管服务，得到固定网址。注意：**默认发布是公开可访问的**；如果要求仅自己访问，需要配置 Cloudflare Access 等鉴权。也可以通过 Tailscale 私有网络访问家中电脑，但电脑必须保持开机。
+## 当前实现
 
-## 实现每天自动更新（第二阶段）
-当前启动包仅负责**已核实播报稿 → 男声语音 → 静态电台**，不自动抓新闻，也不自动上传网站。
-- 配置合规新闻来源（交易所公告、公司IR、监管机构原文、授权新闻API）和大模型摘要/风险扫描流程；增加来源、日期和5条数量的校验。
-- 将每天生成的核实播报稿写入 `brief.md`，然后通过 Windows 任务计划程序于北京时间07:30运行 `run_today.bat`。
-- 使用 GitHub Actions / Cloudflare Pages 的发布流水线更新 `site/`。如果电脑不常开，则把采集、生成、TTS和发布都迁移到云端定时任务。
-- 对新闻生成失败、TTS失败或来源无法核实时，保持旧节目并标注旧日期，绝不虚构今日节目。
+- `episodes/2026-10-11.json`：首期人工编排的五条原文简报。
+- `build_radio.py`：校验稿件，生成普通话男声 MP3，生成手机网页、文字稿和最近14期。
+- `auto_news.py`：从证监会、工信部、巨潮资讯、英伟达、三星读取官方原文；RSS仅用于发现链接，无法读取正文则拒绝该条。文章日期不超过7日，稿中显示原日期。
+- 开放模型在 GitHub 运行机器内编写中文稿；检查对应原文片段、数字、日期、重复、栏目覆盖，并再次阅读核对。再次阅读由同一个模型完成，**不等于独立交叉核验**，中文翻译和分析仍可能错误。自动稿标注“待人工复核”。
+- 若数据/模型/编辑校验/语音失败，保留上一期音频和真实日期，网页显示更新状态；流程返回失败，便于通过 GitHub 原生通知获知。
+- 近期节目和状态提交到仓库保存；网页展示最近14期，超出展示窗口的节目仍可能存在于公开 Git 历史中。
 
-## 版权、隐私与费用
-Edge TTS 通过外部服务生成语音，需要联网，使用前核对服务条款和可用性；不要直接转载受版权保护的整篇新闻。若有商用计划，优先使用具有明确商用授权的TTS API。公开站点上的MP3默认可以被访问和转发。静态托管可能有免费额度，但API、TTS、域名、流量可能产生费用。
+## 上线
 
-## 推荐播报稿结构
-1. 30秒开场：今天最重要的两件事。
-2. 五条新闻：事实（来源、时间）→ 为什么重要 → 关联A股/产业链 → 不确定性。
-3. 政策雷达：新法案/监管、何时投票或生效、涉及企业、当前状态。
-4. 资金与预期：A股收盘和板块成交（周末用最近交易日）；业绩预告和机构预期分开标记。
-5. 结束语：未来7天关键催化和风险节点。
+1. 将完整项目上传到公开仓库根目录，含 `.github/workflows/daily-radio.yml`。不要只上传ZIP。
+2. GitHub 仓库 Settings → Pages → Source 选择 **GitHub Actions**。
+3. Actions → **Daily AI radio** → Run workflow，检查 `build`、`deploy`、`update-result` 均成功。
+4. 以 Pages 返回的实际网址为准；仓库 `user-cj/daily-ai-radio` 的预期地址是 `https://user-cj.github.io/daily-ai-radio/`。
+5. 首次打开点击播放；Safari 分享 → 添加到主屏幕。iPhone锁屏音频需要用户在真机验证，网页不自动播放。
 
-## iPhone + GitHub Pages 零付费自动版（新增）
-1. 在iPhone Safari登录 github.com，创建**公开仓库**（例如 `daily-ai-radio`）。公开仓库和生成的音频、网页默认可被任何知道网址的人访问；不要放密钥或私人资料。
-2. 将本包 `daily-radio` 文件夹**里面的文件及 `.github/workflows/daily-radio.yml`** 上传到仓库根目录（不是把整个ZIP直接上传）。手机操作 GitHub 网页不便，可用 Safari 请求桌面网站；若无法上传隐藏目录，改用GitHub网页逐个创建相应路径。
-3. 仓库 Settings → Pages → Build and deployment → Source 选择 **GitHub Actions**。
-4. Actions → Daily radio (free) → Run workflow，等待执行。成功后在 Settings → Pages 找到网址 `https://用户名.github.io/仓库名/`。
-5. Safari 打开电台 → 分享 → 添加到主屏幕。
-6. 每天北京时间约07:30触发。GitHub定时任务可能延迟或跳过，免费额度及平台政策以实际为准；首次运行可能因Edge TTS网络服务不稳定而失败。
+随交付包提供 `publish.ps1`（双击 `Publish.cmd`），优先使用本机登录状态；缺少账号连接时启动 GitHub 官方登录。脚本核对目标仓库权限、同步主分支、完整上传、启用 Pages、手动运行并检查首次部署。不会强制覆盖远程分支，不索取或保存密码到项目。
 
-**重要限制：** 这是“5条带来源链接的RSS新闻线索播报”，不是具有独立交叉核验、机构观点和资金面精准数据的完整专业简报。RSS新闻标题可能重复、偏旧或误导；系统在不足5条近48小时线索时拒绝生成。语音服务是非官方接口，可能不可用；新闻源为Google News RSS，GitHub云端运行一般可访问，但中国大陆收听GitHub Pages的稳定性不能保证。每天重新部署的静态站点默认仅保留当期节目（历史节目需后续接入持久存储）。这套方案不需要绑定银行卡或填写付费API密钥，但无法保证永久免费及稳定运行。
+## 定时与通知
+
+主任务 UTC 23:00（北京时间次日07:00）启动采集和编辑，为07:30左右节目做好准备；UTC 23:50（北京时间次日07:50）重试。当天已完成节目时不重复编写。免费运行机器排队、模型速度和语音网络都可能使发布时间晚于07:30。
+
+GitHub公开仓库长期无活动可能停止定时运行，定时事件也可能延迟/丢弃。查看 Actions 是否启用；若停用，重新启用并手动运行。失败通知通过 GitHub Settings → Notifications → Actions，打开失败工作流通知。网站显示旧日期和失败状态，不虚构今日五条。
+
+GitHub Pages在中国大陆网络的可用性需要实际测试。完整网页、稿件与MP3可下载后离线保存。没有免费稳定性或永久免费承诺。
+
+## 本地运行
+
+需要 Python 3.12 和联网。
+
+```powershell
+python -m pip install -r requirements.txt
+python -m unittest discover -s tests -v
+python build_radio.py --input episodes/2026-10-11.json
+python -m http.server 8000 --directory site --bind 127.0.0.1
+```
+
+电脑访问 `http://127.0.0.1:8000/`。
+
+自动采集可单独检查，不需要模型：
+
+```powershell
+python auto_news.py --collect-only --report work/source-report.json
+```
+
+自动编辑需要本机 Ollama 和 `qwen2.5:14b`。这是独立开放模型，无需使用任何聊天订阅的API额度。原文、模型结果、语音均可能出错，不能替代专业核查。默认使用免费的第三方 Edge TTS 接口，服务失效时自动尝试另一种男声，两者失败则保留旧节目。
+
+## 编辑要求与资料边界
+
+事实必须来自原文；计划、预告、征求意见、正式实施不能混为一谈。政策与下行风险优先，不推算未经披露的资金流、机构预测、订单、客户关系和目标价。海外厂商业绩不能直接说明A股公司获益。资金净买入和全市场资金流必须分开。
+
+自动采集对部分公告站点的防护、PDF格式和页面变动可能失败。默认不提供完整的A股行情、机构一致预期或所有公司公告覆盖；缺少的数据在稿件里明确列出，宁可留缺。当前版本是有原文证据的自动简报与首期编辑稿，不宣称全自动专业事实核验已经完成。
+
+参考官方资料：
+- https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages
+- https://docs.github.com/en/actions/reference/workflows-and-actions/events-that-trigger-workflows#schedule
+- https://github.com/ollama/ollama
+- https://docs.ollama.com/capabilities/structured-outputs
+- https://github.com/rany2/edge-tts
+
+原仓库的启动说明保留在 `README.original.md`。

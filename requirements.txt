@@ -1,0 +1,7 @@
+edge-tts==7.2.8
+beautifulsoup4==4.15.0
+feedparser==6.0.14
+mutagen==1.48.1
+PyYAML==6.0.3
+pypdf==6.20.0
+truststore==0.10.4
