@@ -50,6 +50,14 @@ class PublicationSafeguards(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, '重复句子'):
             auto_news.evidence_validate({'items': [item]}, [source], date(2026,10,11), complete=False)
 
+    def test_guidance_does_not_imply_segment_competitiveness(self):
+        item = {'facts': '公司发布合并业绩预告。微软宣布产品的通用', 'analysis': '可能表明半导体市场竞争力强劲', 'chain': '半导体', 'risk': '正式文本与实施日期仍需公告确认'}
+        source = {'title': 'Samsung Electronics Announces Earnings Guidance', 'bucket': '芯片与硬件'}
+        reviewed = auto_news.apply_editorial_notes(item, source)
+        self.assertEqual(reviewed['facts'], '公司发布合并业绩预告。')
+        self.assertIn('无法单独证明', reviewed['analysis'])
+        self.assertNotIn('正式文本', reviewed['risk'])
+
     def test_source_body_cannot_execute_html(self):
         self.edition['items'][0]['facts'] = '<script>alert(1)</script>'
         self.edition.update(audio='audio/test.mp3', transcript='transcripts/test.md', page='editions/test.html')
