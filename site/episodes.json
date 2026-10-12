@@ -110,8 +110,8 @@
     "transcript": "transcripts/2026-10-12-4e68185da0.md",
     "page": "editions/2026-10-12-4e68185da0.html",
     "duration_seconds": 483.5,
-    "podcast_audio": "audio/2026-10-12-4e68185da0-speed13.mp3",
-    "podcast_duration_seconds": 372.0,
+    "podcast_audio": "audio/2026-10-12-4e68185da0.mp3",
+    "podcast_duration_seconds": 483.5,
     "podcast_published_at": "2026-10-12T07:28:03.940967+08:00"
   },
   {
@@ -211,8 +211,8 @@
     "transcript": "transcripts/2026-10-11-529abd3c64.md",
     "page": "editions/2026-10-11-529abd3c64.html",
     "duration_seconds": 511.9,
-    "podcast_audio": "audio/2026-10-11-529abd3c64-speed13.mp3",
-    "podcast_duration_seconds": 393.8,
+    "podcast_audio": "audio/2026-10-11-529abd3c64.mp3",
+    "podcast_duration_seconds": 511.9,
     "podcast_published_at": "2026-10-11T21:26:46.679056+08:00"
   }
 ]

@@ -108,7 +108,7 @@ def podcast_feed(history, site):
     for tag, value in {
         'title': '硬件学长 · AI财经广播',
         'link': SITE_URL,
-        'description': '每日五条有日期、有官方原文的普通话男声简报。音频已为1.3倍速，播放器请选择1倍。自动稿待人工复核。',
+        'description': '每日五条有日期、有官方原文的普通话男声简报。音频为1倍原速，播放器请选择1倍。自动稿待人工复核。',
         'language': 'zh-cn',
         f'{{{ITUNES_NS}}}author': '硬件学长',
         f'{{{ITUNES_NS}}}explicit': 'false',
@@ -120,18 +120,18 @@ def podcast_feed(history, site):
     ET.SubElement(channel, f'{{{ITUNES_NS}}}category', text='News')
     for entry in history:
         # Each episode has its own immutable audio URL, never latest.mp3.
-        audio = entry.get('podcast_audio')
+        audio = entry.get('audio')
         if not audio:
             continue
         asset = site / audio
         item = ET.SubElement(channel, 'item')
-        ET.SubElement(item, 'title').text = f"{entry['date']} · 每日五条（1.3倍版）"
+        ET.SubElement(item, 'title').text = f"{entry['date']} · 每日五条（1倍原速）"
         ET.SubElement(item, 'link').text = SITE_URL + entry['page']
         ET.SubElement(item, 'description').text = entry['intro'] + '\n' + entry['review']
         ET.SubElement(item, 'guid', isPermaLink='false').text = 'daily-ai-radio:' + Path(audio).stem
         ET.SubElement(item, 'pubDate').text = format_datetime(datetime.fromisoformat(entry['podcast_published_at']))
         ET.SubElement(item, 'enclosure', url=SITE_URL + audio, length=str(asset.stat().st_size), type='audio/mpeg')
-        ET.SubElement(item, f'{{{ITUNES_NS}}}duration').text = str(round(entry['podcast_duration_seconds']))
+        ET.SubElement(item, f'{{{ITUNES_NS}}}duration').text = str(round(entry['duration_seconds']))
         ET.SubElement(item, f'{{{ITUNES_NS}}}explicit').text = 'false'
         ET.SubElement(item, f'{{{ITUNES_NS}}}episodeType').text = 'full'
     return ET.tostring(rss, encoding='utf-8', xml_declaration=True)
@@ -183,11 +183,11 @@ def build(input_path, site):
         history_path = stage / 'episodes.json'
         history = json.loads(history_path.read_text(encoding='utf-8')) if history_path.exists() else []
         existing = next((e for e in history if e['date'] == edition['date']), {})
-        podcast_audio = f'audio/{base}-speed13.mp3'
-        podcast_seconds = speed_audio(mp3, stage / podcast_audio)
+        automation_audio = f'audio/{base}-speed13.mp3'
+        automation_seconds = speed_audio(mp3, stage / automation_audio)
         edition.update(
-            podcast_audio=podcast_audio,
-            podcast_duration_seconds=round(podcast_seconds, 1),
+            podcast_audio=edition['audio'],
+            podcast_duration_seconds=round(duration, 1),
             podcast_published_at=existing.get('podcast_published_at', datetime.now(BJT).isoformat()),
         )
         history = [edition] + [e for e in history if e['date'] != edition['date']]
@@ -195,8 +195,7 @@ def build(input_path, site):
         history = history[:14]
         # Keep the user's existing automation URL, with its preferred speed.
         # Conversion and duration checks finish before replacing the old site.
-        shutil.copyfile(stage / history[0]['podcast_audio'], stage / 'latest.mp3')
-        automation_seconds = history[0]['podcast_duration_seconds']
+        shutil.copyfile(stage / automation_audio, stage / 'latest.mp3')
         (stage / 'automation.json').write_text(json.dumps({
             'date': history[0]['date'], 'audio': 'latest.mp3',
             'speed': AUTOMATION_SPEED, 'duration_seconds': round(automation_seconds, 1),
@@ -215,8 +214,8 @@ def build(input_path, site):
         for name in ('style.css', 'player.js', 'icon.svg', 'manifest.webmanifest', 'shortcuts.html', 'podcast-cover.png'):
             shutil.copyfile(ROOT / 'web' / name, stage / name)
         guide = (stage / 'shortcuts.html').read_text(encoding='utf-8')
-        guide = guide.replace('{{AUTO_SPEED}}', str(AUTOMATION_SPEED))
-        guide = guide.replace('{{AUTO_DURATION}}', f'{int(automation_seconds // 60)}分{int(automation_seconds % 60):02d}秒')
+        guide = guide.replace('{{AUTO_SPEED}}', '1')
+        guide = guide.replace('{{AUTO_DURATION}}', f'{int(duration // 60)}分{int(duration % 60):02d}秒')
         (stage / 'shortcuts.html').write_text(guide, encoding='utf-8')
         keep = {e[k] for e in history for k in ('audio', 'transcript', 'page')}
         keep.update(e['podcast_audio'] for e in history if e.get('podcast_audio'))

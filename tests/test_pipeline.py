@@ -130,7 +130,9 @@ class PublicationSafeguards(unittest.TestCase):
             self.assertNotEqual(feed.entries[0].enclosures[0].href, feed.entries[1].enclosures[0].href)
             for entry, episode in zip(feed.entries, history):
                 enclosure = entry.enclosures[0]
-                self.assertEqual(enclosure.href, build_radio.SITE_URL + episode['podcast_audio'])
+                self.assertEqual(enclosure.href, build_radio.SITE_URL + episode['audio'])
+                self.assertEqual(entry.itunes_duration, str(round(episode['duration_seconds'])))
+                self.assertIn('1倍原速', entry.title)
                 self.assertEqual(int(enclosure.length), (site / episode['podcast_audio']).stat().st_size)
             with patch('mutagen.mp3.MP3', return_value=metadata), patch.object(build_radio, 'speed_audio', fake_speed):
                 build_radio.build(edition_path, site)
