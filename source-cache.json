@@ -1,5 +1,19 @@
 [
   {
+    "title": "浪潮信息：2026年前三季度业绩预告",
+    "url": "https://static.cninfo.com.cn/finalpage/2026-10-14/1225603446.PDF",
+    "published": "2026-10-14",
+    "publisher": "巨潮资讯披露：浪潮信息",
+    "bucket": "A股与公司公告"
+  },
+  {
+    "title": "From Earth to Orbit, France’s Ecosystem Delivers Agentic Computing at Scale With NVIDIA",
+    "url": "https://blogs.nvidia.com/blog/france-ecosystem-agentic-computing/",
+    "published": "2026-10-13",
+    "publisher": "英伟达官方",
+    "bucket": "AI与科技前沿"
+  },
+  {
     "title": "OCP Global Summit: Amid Ecosystem Adoption, NVIDIA Opens Vera Rubin Architecture to Help Scale AI Factories Worldwide",
     "url": "https://blogs.nvidia.com/blog/ocp-global-summit-vera-rubin-scale-ai-factories/",
     "published": "2026-10-12",
@@ -47,12 +61,5 @@
     "published": "2026-10-07",
     "publisher": "英伟达官方",
     "bucket": "芯片与硬件"
-  },
-  {
-    "title": "Why Telecom Operators Are Building Their AI Strategy on Open Models",
-    "url": "https://blogs.nvidia.com/blog/telecom-operators-open-models/",
-    "published": "2026-10-06",
-    "publisher": "英伟达官方",
-    "bucket": "AI与科技前沿"
   }
 ]
