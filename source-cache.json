@@ -1,10 +1,52 @@
 [
   {
+    "title": "海光信息：海光信息技术股份有限公司关于召开2026年第三季度业绩说明会的公告",
+    "url": "https://static.cninfo.com.cn/finalpage/2026-10-15/1225604886.PDF",
+    "published": "2026-10-15",
+    "publisher": "巨潮资讯披露：海光信息",
+    "bucket": "A股与公司公告"
+  },
+  {
     "title": "浪潮信息：2026年前三季度业绩预告",
     "url": "https://static.cninfo.com.cn/finalpage/2026-10-14/1225603446.PDF",
     "published": "2026-10-14",
     "publisher": "巨潮资讯披露：浪潮信息",
     "bucket": "A股与公司公告"
+  },
+  {
+    "title": "NVIDIA and Semiconductor Leaders Advance AI Across Chip Design and Manufacturing for AI-Defined Fabs",
+    "url": "https://nvidianews.nvidia.com/news/nvidia-and-semiconductor-leaders-advance-ai-across-chip-design-and-manufacturing-for-ai-defined-labs",
+    "published": "2026-10-14",
+    "publisher": "英伟达官方",
+    "bucket": "芯片与硬件"
+  },
+  {
+    "title": "NVIDIA Commits $250 Million to Advance UK Agentic Safety and Security Research Over the Next Five Years",
+    "url": "https://nvidianews.nvidia.com/news/nvidia-commits-250-million-to-advance-uk-agentic-safety-and-security-research-over-the-next-five-years",
+    "published": "2026-10-14",
+    "publisher": "英伟达官方",
+    "bucket": "AI与科技前沿"
+  },
+  {
+    "title": "European Cities Deploy NVIDIA-Powered AI Agents to Run Smarter Urban Operations",
+    "url": "https://blogs.nvidia.com/blog/european-cities-agents-urban-operations/",
+    "published": "2026-10-14",
+    "publisher": "英伟达官方",
+    "bucket": "芯片与硬件"
+  },
+  {
+    "title": "Samsung Expands Language Support Across AI Experiences on Galaxy",
+    "url": "https://news.samsung.com/global/samsung-expands-language-support-across-ai-experiences-on-galaxy",
+    "published": "2026-10-14",
+    "publisher": "三星电子官方",
+    "bucket": "芯片与硬件"
+  },
+  {
+    "title": "Samsung Health Makes Sleep Coaching Easier To Start and Tailors Weekly Guidance",
+    "url": "https://news.samsung.com/global/samsung-health-makes-sleep-coaching-easier-to-start-and-tailors-weekly-guidance",
+    "published": "2026-10-14",
+    "publisher": "三星电子官方",
+    "bucket": "芯片与硬件"
   },
   {
     "title": "From Earth to Orbit, France’s Ecosystem Delivers Agentic Computing at Scale With NVIDIA",
@@ -54,12 +96,5 @@
     "published": "2026-10-08",
     "publisher": "英伟达官方",
     "bucket": "AI与科技前沿"
-  },
-  {
-    "title": "NVIDIA, Microsoft Kick Off a New Beginning for Windows PCs with RTX Spark and AI Agents",
-    "url": "https://blogs.nvidia.com/blog/local-ai-rtx-spark-microsoft-windows-event/",
-    "published": "2026-10-07",
-    "publisher": "英伟达官方",
-    "bucket": "芯片与硬件"
   }
 ]
