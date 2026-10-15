@@ -1,10 +1,38 @@
 [
   {
+    "title": "海光信息：海光信息技术股份有限公司关于2026年前三季度业绩预告的自愿性披露公告",
+    "url": "https://static.cninfo.com.cn/finalpage/2026-10-16/1225607428.PDF",
+    "published": "2026-10-16",
+    "publisher": "巨潮资讯披露：海光信息",
+    "bucket": "A股与公司公告"
+  },
+  {
     "title": "海光信息：海光信息技术股份有限公司关于召开2026年第三季度业绩说明会的公告",
     "url": "https://static.cninfo.com.cn/finalpage/2026-10-15/1225604886.PDF",
     "published": "2026-10-15",
     "publisher": "巨潮资讯披露：海光信息",
     "bucket": "A股与公司公告"
+  },
+  {
+    "title": "Adobe and NVIDIA Expand Collaboration to Speed Agentic Creation",
+    "url": "https://nvidianews.nvidia.com/news/adobe-and-nvidia-expand-collaboration-to-speed-agentic-creation",
+    "published": "2026-10-15",
+    "publisher": "英伟达官方",
+    "bucket": "AI与科技前沿"
+  },
+  {
+    "title": "NVIDIA Expands Advanced Technology Access for Europe’s Scientific Community Through Open Learning Resources, Collaborations and Compute",
+    "url": "https://blogs.nvidia.com/blog/ec-scientific-computing-pledge/",
+    "published": "2026-10-15",
+    "publisher": "英伟达官方",
+    "bucket": "AI与科技前沿"
+  },
+  {
+    "title": "The Nordics and NVIDIA Show What’s Possible When a Region Commits to Advanced Computing",
+    "url": "https://blogs.nvidia.com/blog/nordics-technology-ecosystem/",
+    "published": "2026-10-15",
+    "publisher": "英伟达官方",
+    "bucket": "AI与科技前沿"
   },
   {
     "title": "浪潮信息：2026年前三季度业绩预告",
@@ -82,19 +110,5 @@
     "published": "2026-10-09",
     "publisher": "中国证监会",
     "bucket": "A股与政策"
-  },
-  {
-    "title": "Samsung Electronics Announces Earnings Guidance for Third Quarter 2026",
-    "url": "https://news.samsung.com/global/samsung-electronics-announces-earnings-guidance-for-third-quarter-2026",
-    "published": "2026-10-08",
-    "publisher": "三星电子官方",
-    "bucket": "芯片与硬件"
-  },
-  {
-    "title": "Into the Omniverse: How Developers Turn Ideas Into Simulations With Frontier AI Agents",
-    "url": "https://blogs.nvidia.com/blog/developers-simulations-frontier-ai-agents/",
-    "published": "2026-10-08",
-    "publisher": "英伟达官方",
-    "bucket": "AI与科技前沿"
   }
 ]
