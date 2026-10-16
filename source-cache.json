@@ -1,10 +1,31 @@
 [
   {
+    "title": "寒武纪：关于召开2026年第三季度业绩说明会的公告",
+    "url": "https://static.cninfo.com.cn/finalpage/2026-10-17/1225608859.PDF",
+    "published": "2026-10-17",
+    "publisher": "巨潮资讯披露：寒武纪",
+    "bucket": "A股与公司公告"
+  },
+  {
     "title": "海光信息：海光信息技术股份有限公司关于2026年前三季度业绩预告的自愿性披露公告",
     "url": "https://static.cninfo.com.cn/finalpage/2026-10-16/1225607428.PDF",
     "published": "2026-10-16",
     "publisher": "巨潮资讯披露：海光信息",
     "bucket": "A股与公司公告"
+  },
+  {
+    "title": "NVIDIA RTX Spark PCs Available Today — A New Beginning for Windows PCs",
+    "url": "https://nvidianews.nvidia.com/news/nvidia-rtx-spark-pcs-available-today-a-new-beginning-for-windows-pcs",
+    "published": "2026-10-16",
+    "publisher": "英伟达官方",
+    "bucket": "芯片与硬件"
+  },
+  {
+    "title": "信息技术发展司召开电子认证业务规则规范改造工作推进会",
+    "url": "https://www.miit.gov.cn/xwfb/gxdt/sjdt/art/2026/art_4bbb7f532fac48718d394cf89cb74d76.html",
+    "published": "2026-10-16",
+    "publisher": "工业和信息化部",
+    "bucket": "芯片与硬件"
   },
   {
     "title": "海光信息：海光信息技术股份有限公司关于召开2026年第三季度业绩说明会的公告",
@@ -101,13 +122,6 @@
     "title": "中国证监会召开资本市场和金融形势专家座谈会",
     "url": "https://www.csrc.gov.cn/csrc/c100028/c7663814/content.shtml",
     "published": "2026-10-10",
-    "publisher": "中国证监会",
-    "bucket": "A股与政策"
-  },
-  {
-    "title": "中国证监会就《公开募集证券投资基金运作管理办法（征求意见稿）》及配套规则公开征求意见",
-    "url": "https://www.csrc.gov.cn/csrc/c100028/c7663393/content.shtml",
-    "published": "2026-10-09",
     "publisher": "中国证监会",
     "bucket": "A股与政策"
   }
