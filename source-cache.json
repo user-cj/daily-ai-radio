@@ -1,5 +1,19 @@
 [
   {
+    "title": "Spain-Based Startups Advance Regional Innovation With Barcelona Supercomputing Center",
+    "url": "https://blogs.nvidia.com/blog/spain-startups-barcelona-supercomputing-center/",
+    "published": "2026-10-20",
+    "publisher": "英伟达官方",
+    "bucket": "AI与科技前沿"
+  },
+  {
+    "title": "Tailored for Every Home: Samsung “The Brief” Goes Global With AI-Powered Home Appliances",
+    "url": "https://news.samsung.com/global/tailored-for-every-home-samsung-the-brief-goes-global-with-ai-powered-home-appliances",
+    "published": "2026-10-20",
+    "publisher": "三星电子官方",
+    "bucket": "芯片与硬件"
+  },
+  {
     "title": "海光信息：海光信息技术股份有限公司关于公司董事长提议回购股份的公告",
     "url": "https://static.cninfo.com.cn/finalpage/2026-10-19/1225609999.PDF",
     "published": "2026-10-19",
@@ -159,12 +173,5 @@
     "published": "2026-10-14",
     "publisher": "三星电子官方",
     "bucket": "芯片与硬件"
-  },
-  {
-    "title": "From Earth to Orbit, France’s Ecosystem Delivers Agentic Computing at Scale With NVIDIA",
-    "url": "https://blogs.nvidia.com/blog/france-ecosystem-agentic-computing/",
-    "published": "2026-10-13",
-    "publisher": "英伟达官方",
-    "bucket": "AI与科技前沿"
   }
 ]
