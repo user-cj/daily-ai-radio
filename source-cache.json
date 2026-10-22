@@ -1,5 +1,47 @@
 [
   {
+    "title": "NVIDIA Unveils Minerva to Bring End-to-End Observability for AI Factories",
+    "url": "https://blogs.nvidia.com/blog/minerva-platform-infrastructure/",
+    "published": "2026-10-22",
+    "publisher": "英伟达官方",
+    "bucket": "AI与科技前沿"
+  },
+  {
+    "title": "NVIDIA Cosmos Opens New Tools to Train, Evaluate and Deploy World Models",
+    "url": "https://blogs.nvidia.com/blog/cosmos-open-train-evaluate-deploy-world-models/",
+    "published": "2026-10-22",
+    "publisher": "英伟达官方",
+    "bucket": "AI与科技前沿"
+  },
+  {
+    "title": "How Companies Are Using NVIDIA DSX to Break the Power Bottleneck",
+    "url": "https://blogs.nvidia.com/blog/dsx-power/",
+    "published": "2026-10-22",
+    "publisher": "英伟达官方",
+    "bucket": "芯片与硬件"
+  },
+  {
+    "title": "NVIDIA Transforms European Retail, From Digital Discovery to Physical Operations",
+    "url": "https://blogs.nvidia.com/blog/european-retail-open-models-robotics/",
+    "published": "2026-10-22",
+    "publisher": "英伟达官方",
+    "bucket": "AI与科技前沿"
+  },
+  {
+    "title": "Pioneers Across Europe Deploy NVIDIA Earth-2 Open Models to Power Real-World Weather and Climate Prediction",
+    "url": "https://blogs.nvidia.com/blog/europe-earth-2-open-models-weather-climate-prediction/",
+    "published": "2026-10-22",
+    "publisher": "英伟达官方",
+    "bucket": "芯片与硬件"
+  },
+  {
+    "title": "NVIDIA Open Models Power a New Wave of European Public Sector Projects",
+    "url": "https://blogs.nvidia.com/blog/european-public-sector-open-models/",
+    "published": "2026-10-22",
+    "publisher": "英伟达官方",
+    "bucket": "芯片与硬件"
+  },
+  {
     "title": "Bringing the Spark to Europe: Local Intelligence Powers Next Wave of Agents",
     "url": "https://blogs.nvidia.com/blog/local-ai-gtc-rtx-dgx-spark-station-sync/",
     "published": "2026-10-21",
@@ -180,33 +222,5 @@
     "published": "2026-10-16",
     "publisher": "工业和信息化部",
     "bucket": "芯片与硬件"
-  },
-  {
-    "title": "海光信息：海光信息技术股份有限公司关于召开2026年第三季度业绩说明会的公告",
-    "url": "https://static.cninfo.com.cn/finalpage/2026-10-15/1225604886.PDF",
-    "published": "2026-10-15",
-    "publisher": "巨潮资讯披露：海光信息",
-    "bucket": "A股与公司公告"
-  },
-  {
-    "title": "Adobe and NVIDIA Expand Collaboration to Speed Agentic Creation",
-    "url": "https://nvidianews.nvidia.com/news/adobe-and-nvidia-expand-collaboration-to-speed-agentic-creation",
-    "published": "2026-10-15",
-    "publisher": "英伟达官方",
-    "bucket": "AI与科技前沿"
-  },
-  {
-    "title": "NVIDIA Expands Advanced Technology Access for Europe’s Scientific Community Through Open Learning Resources, Collaborations and Compute",
-    "url": "https://blogs.nvidia.com/blog/ec-scientific-computing-pledge/",
-    "published": "2026-10-15",
-    "publisher": "英伟达官方",
-    "bucket": "AI与科技前沿"
-  },
-  {
-    "title": "The Nordics and NVIDIA Show What’s Possible When a Region Commits to Advanced Computing",
-    "url": "https://blogs.nvidia.com/blog/nordics-technology-ecosystem/",
-    "published": "2026-10-15",
-    "publisher": "英伟达官方",
-    "bucket": "AI与科技前沿"
   }
 ]
