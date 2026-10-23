@@ -1,5 +1,33 @@
 [
   {
+    "title": "Kazakhstan Expands Compute for Its AI Future",
+    "url": "https://blogs.nvidia.com/blog/kazakhstan-ai-compute-ecosystem/",
+    "published": "2026-10-23",
+    "publisher": "英伟达官方",
+    "bucket": "AI与科技前沿"
+  },
+  {
+    "title": "中国证监会就《私募投资母基金管理规定（征求意见稿）》公开征求意见",
+    "url": "https://www.csrc.gov.cn/csrc/c100028/c7666352/content.shtml",
+    "published": "2026-10-23",
+    "publisher": "中国证监会",
+    "bucket": "A股与政策"
+  },
+  {
+    "title": "关于公开征求《电子认证业务规则规范》等14项行业标准报批意见的公示",
+    "url": "https://www.miit.gov.cn/gzcy/yjzj/art/2026/art_3d630ae782994bfdb0ce42101dffe0b7.html",
+    "published": "2026-10-23",
+    "publisher": "工业和信息化部",
+    "bucket": "芯片与硬件"
+  },
+  {
+    "title": "电器电子产品有害物质限制使用（中国RoHS）信息报送情况（截至2026年9月30日）",
+    "url": "https://www.miit.gov.cn/xwfb/gxdt/sjdt/art/2026/art_049bcc6d6d254d9bb78ff6aa79767eff.html",
+    "published": "2026-10-23",
+    "publisher": "工业和信息化部",
+    "bucket": "芯片与硬件"
+  },
+  {
     "title": "NVIDIA Unveils Minerva to Bring End-to-End Observability for AI Factories",
     "url": "https://blogs.nvidia.com/blog/minerva-platform-infrastructure/",
     "published": "2026-10-22",
@@ -201,26 +229,5 @@
     "published": "2026-10-17",
     "publisher": "巨潮资讯披露：寒武纪",
     "bucket": "A股与公司公告"
-  },
-  {
-    "title": "海光信息：海光信息技术股份有限公司关于2026年前三季度业绩预告的自愿性披露公告",
-    "url": "https://static.cninfo.com.cn/finalpage/2026-10-16/1225607428.PDF",
-    "published": "2026-10-16",
-    "publisher": "巨潮资讯披露：海光信息",
-    "bucket": "A股与公司公告"
-  },
-  {
-    "title": "NVIDIA RTX Spark PCs Available Today — A New Beginning for Windows PCs",
-    "url": "https://nvidianews.nvidia.com/news/nvidia-rtx-spark-pcs-available-today-a-new-beginning-for-windows-pcs",
-    "published": "2026-10-16",
-    "publisher": "英伟达官方",
-    "bucket": "芯片与硬件"
-  },
-  {
-    "title": "信息技术发展司召开电子认证业务规则规范改造工作推进会",
-    "url": "https://www.miit.gov.cn/xwfb/gxdt/sjdt/art/2026/art_4bbb7f532fac48718d394cf89cb74d76.html",
-    "published": "2026-10-16",
-    "publisher": "工业和信息化部",
-    "bucket": "芯片与硬件"
   }
 ]
