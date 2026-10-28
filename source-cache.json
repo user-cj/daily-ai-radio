@@ -1,5 +1,12 @@
 [
   {
+    "title": "How AI Is Changing the Pace of Discovery for Millions Living With Dementia",
+    "url": "https://blogs.nvidia.com/blog/open-source-ai-tools-cbrain-dementia/",
+    "published": "2026-10-27",
+    "publisher": "英伟达官方",
+    "bucket": "AI与科技前沿"
+  },
+  {
     "title": "Kazakhstan Expands Compute for Its AI Future",
     "url": "https://blogs.nvidia.com/blog/kazakhstan-ai-compute-ecosystem/",
     "published": "2026-10-23",
@@ -144,20 +151,6 @@
     "url": "https://www.miit.gov.cn/xwfb/gxdt/sjdt/art/2026/art_db6b36f455cb4ee39042020bd526aff5.html",
     "published": "2026-10-21",
     "publisher": "工业和信息化部",
-    "bucket": "芯片与硬件"
-  },
-  {
-    "title": "Spain-Based Startups Advance Regional Innovation With Barcelona Supercomputing Center",
-    "url": "https://blogs.nvidia.com/blog/spain-startups-barcelona-supercomputing-center/",
-    "published": "2026-10-20",
-    "publisher": "英伟达官方",
-    "bucket": "AI与科技前沿"
-  },
-  {
-    "title": "Tailored for Every Home: Samsung “The Brief” Goes Global With AI-Powered Home Appliances",
-    "url": "https://news.samsung.com/global/tailored-for-every-home-samsung-the-brief-goes-global-with-ai-powered-home-appliances",
-    "published": "2026-10-20",
-    "publisher": "三星电子官方",
     "bucket": "芯片与硬件"
   }
 ]
