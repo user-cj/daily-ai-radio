@@ -1,5 +1,12 @@
 [
   {
+    "title": "NVIDIA RTX Spark Windows Laptops Gain New Models, Agent Tools and Games",
+    "url": "https://blogs.nvidia.com/blog/local-ai-rtx-spark-laptops-updates-models-agents-games/",
+    "published": "2026-10-28",
+    "publisher": "英伟达官方",
+    "bucket": "芯片与硬件"
+  },
+  {
     "title": "How AI Is Changing the Pace of Discovery for Millions Living With Dementia",
     "url": "https://blogs.nvidia.com/blog/open-source-ai-tools-cbrain-dementia/",
     "published": "2026-10-27",
@@ -74,83 +81,6 @@
     "url": "https://blogs.nvidia.com/blog/european-public-sector-open-models/",
     "published": "2026-10-22",
     "publisher": "英伟达官方",
-    "bucket": "芯片与硬件"
-  },
-  {
-    "title": "Bringing the Spark to Europe: Local Intelligence Powers Next Wave of Agents",
-    "url": "https://blogs.nvidia.com/blog/local-ai-gtc-rtx-dgx-spark-station-sync/",
-    "published": "2026-10-21",
-    "publisher": "英伟达官方",
-    "bucket": "芯片与硬件"
-  },
-  {
-    "title": "Google Cloud and NVIDIA Announce General Availability of NVIDIA Vera Rubin Infrastructure",
-    "url": "https://blogs.nvidia.com/blog/google-cloud-vera-rubin-infrastructure/",
-    "published": "2026-10-21",
-    "publisher": "英伟达官方",
-    "bucket": "AI与科技前沿"
-  },
-  {
-    "title": "NVIDIA and Supply Chain Partners Expand Capacity to Accelerate AI Infrastructure Buildout",
-    "url": "https://nvidianews.nvidia.com/news/nvidia-and-supply-chain-partners-expand-capacity-to-accelerate-ai-infrastructure-buildout",
-    "published": "2026-10-21",
-    "publisher": "英伟达官方",
-    "bucket": "AI与科技前沿"
-  },
-  {
-    "title": "NVIDIA Cloud Partners Scale Across Europe — Sovereign, Open and Built for Safe AI Agents",
-    "url": "https://blogs.nvidia.com/blog/cloud-partners-europe-sovereign-safety-open-agents/",
-    "published": "2026-10-21",
-    "publisher": "英伟达官方",
-    "bucket": "AI与科技前沿"
-  },
-  {
-    "title": "NVIDIA cuDSS Now Generally Available to Accelerate Engineering and Scientific Simulations",
-    "url": "https://blogs.nvidia.com/blog/cudss-generally-available-engineering-scientific-simulation/",
-    "published": "2026-10-21",
-    "publisher": "英伟达官方",
-    "bucket": "AI与科技前沿"
-  },
-  {
-    "title": "NVIDIA Confidential Computing Expands, Enabling Frontier Model Builders to Securely Scale Across Global Infrastructure",
-    "url": "https://blogs.nvidia.com/blog/confidential-computing-model-builders-infrastructure/",
-    "published": "2026-10-21",
-    "publisher": "英伟达官方",
-    "bucket": "AI与科技前沿"
-  },
-  {
-    "title": "NVIDIA Agent Toolkit Expands, Grounding Enterprise Agents in Company Data",
-    "url": "https://blogs.nvidia.com/blog/enterprise-platforms-agent-toolkit/",
-    "published": "2026-10-21",
-    "publisher": "英伟达官方",
-    "bucket": "AI与科技前沿"
-  },
-  {
-    "title": "NVIDIA Launches OpenShell Reference Architecture for Safe AI Agents",
-    "url": "https://nvidianews.nvidia.com/news/openshell-reference-architecture",
-    "published": "2026-10-21",
-    "publisher": "英伟达官方",
-    "bucket": "AI与科技前沿"
-  },
-  {
-    "title": "European Ecosystem Builds World’s Most Efficient AI Factories With NVIDIA DSX",
-    "url": "https://nvidianews.nvidia.com/news/european-ecosystem-builds-worlds-most-efficient-ai-factories-with-nvidia-dsx",
-    "published": "2026-10-21",
-    "publisher": "英伟达官方",
-    "bucket": "AI与科技前沿"
-  },
-  {
-    "title": "NVIDIA Introduces DSX POD AI Factories to Accelerate Europe’s Infrastructure Deployment",
-    "url": "https://nvidianews.nvidia.com/news/nvidia-introduces-dsx-pod-ai-factories-to-accelerate-europes-infrastructure-deployment",
-    "published": "2026-10-21",
-    "publisher": "英伟达官方",
-    "bucket": "AI与科技前沿"
-  },
-  {
-    "title": "电器电子产品有害物质限制使用（中国RoHS）信息报送情况（截至2026年9月30日）",
-    "url": "https://www.miit.gov.cn/xwfb/gxdt/sjdt/art/2026/art_db6b36f455cb4ee39042020bd526aff5.html",
-    "published": "2026-10-21",
-    "publisher": "工业和信息化部",
     "bucket": "芯片与硬件"
   }
 ]
