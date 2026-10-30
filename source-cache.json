@@ -1,5 +1,12 @@
 [
   {
+    "title": "中际旭创：关于变更回购A股股份用途并注销的公告",
+    "url": "https://static.cninfo.com.cn/finalpage/2026-10-30/1225643958.PDF",
+    "published": "2026-10-30",
+    "publisher": "巨潮资讯披露：中际旭创",
+    "bucket": "A股与公司公告"
+  },
+  {
     "title": "NVIDIA RTX Spark Windows Laptops Gain New Models, Agent Tools and Games",
     "url": "https://blogs.nvidia.com/blog/local-ai-rtx-spark-laptops-updates-models-agents-games/",
     "published": "2026-10-28",
@@ -39,48 +46,6 @@
     "url": "https://www.miit.gov.cn/xwfb/gxdt/sjdt/art/2026/art_049bcc6d6d254d9bb78ff6aa79767eff.html",
     "published": "2026-10-23",
     "publisher": "工业和信息化部",
-    "bucket": "芯片与硬件"
-  },
-  {
-    "title": "NVIDIA Unveils Minerva to Bring End-to-End Observability for AI Factories",
-    "url": "https://blogs.nvidia.com/blog/minerva-platform-infrastructure/",
-    "published": "2026-10-22",
-    "publisher": "英伟达官方",
-    "bucket": "AI与科技前沿"
-  },
-  {
-    "title": "NVIDIA Cosmos Opens New Tools to Train, Evaluate and Deploy World Models",
-    "url": "https://blogs.nvidia.com/blog/cosmos-open-train-evaluate-deploy-world-models/",
-    "published": "2026-10-22",
-    "publisher": "英伟达官方",
-    "bucket": "AI与科技前沿"
-  },
-  {
-    "title": "How Companies Are Using NVIDIA DSX to Break the Power Bottleneck",
-    "url": "https://blogs.nvidia.com/blog/dsx-power/",
-    "published": "2026-10-22",
-    "publisher": "英伟达官方",
-    "bucket": "芯片与硬件"
-  },
-  {
-    "title": "NVIDIA Transforms European Retail, From Digital Discovery to Physical Operations",
-    "url": "https://blogs.nvidia.com/blog/european-retail-open-models-robotics/",
-    "published": "2026-10-22",
-    "publisher": "英伟达官方",
-    "bucket": "AI与科技前沿"
-  },
-  {
-    "title": "Pioneers Across Europe Deploy NVIDIA Earth-2 Open Models to Power Real-World Weather and Climate Prediction",
-    "url": "https://blogs.nvidia.com/blog/europe-earth-2-open-models-weather-climate-prediction/",
-    "published": "2026-10-22",
-    "publisher": "英伟达官方",
-    "bucket": "芯片与硬件"
-  },
-  {
-    "title": "NVIDIA Open Models Power a New Wave of European Public Sector Projects",
-    "url": "https://blogs.nvidia.com/blog/european-public-sector-open-models/",
-    "published": "2026-10-22",
-    "publisher": "英伟达官方",
     "bucket": "芯片与硬件"
   }
 ]
