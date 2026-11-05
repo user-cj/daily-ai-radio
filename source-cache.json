@@ -1,5 +1,12 @@
 [
   {
+    "title": "海光信息：海光信息技术股份有限公司关于以集中竞价交易方式回购公司股份的回购报告书",
+    "url": "https://static.cninfo.com.cn/finalpage/2026-11-05/1225657671.PDF",
+    "published": "2026-11-05",
+    "publisher": "巨潮资讯披露：海光信息",
+    "bucket": "A股与公司公告"
+  },
+  {
     "title": "AI Is Changing How Semiconductor Fabs Work — and Engineers Are Moving Faster Because of It",
     "url": "https://blogs.nvidia.com/blog/ai-semiconductor-fabs/",
     "published": "2026-11-03",
@@ -39,13 +46,6 @@
     "url": "https://www.miit.gov.cn/gxsj/tjfx/dzxx/art/2026/art_bcb9e6c06d814f9183b9f5a795d0610e.html",
     "published": "2026-10-30",
     "publisher": "工业和信息化部",
-    "bucket": "芯片与硬件"
-  },
-  {
-    "title": "NVIDIA RTX Spark Windows Laptops Gain New Models, Agent Tools and Games",
-    "url": "https://blogs.nvidia.com/blog/local-ai-rtx-spark-laptops-updates-models-agents-games/",
-    "published": "2026-10-28",
-    "publisher": "英伟达官方",
     "bucket": "芯片与硬件"
   }
 ]
