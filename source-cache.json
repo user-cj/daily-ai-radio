@@ -7,6 +7,13 @@
     "bucket": "A股与公司公告"
   },
   {
+    "title": "NVIDIA Expands Open Source Commitment With OpenShell Donation and New AI Infrastructure",
+    "url": "https://blogs.nvidia.com/blog/open-source-openshell-infrastructure/",
+    "published": "2026-11-10",
+    "publisher": "英伟达官方",
+    "bucket": "AI与科技前沿"
+  },
+  {
     "title": "NVIDIA Announces New Planned Investments in Korean Startups at the MSIT-NVIDIA AI Startup Partnership Forum",
     "url": "https://blogs.nvidia.com/blog/korean-startup-investments-msit/",
     "published": "2026-11-09",
@@ -89,26 +96,5 @@
     "published": "2026-11-05",
     "publisher": "中国证监会",
     "bucket": "A股与政策"
-  },
-  {
-    "title": "AI Is Changing How Semiconductor Fabs Work — and Engineers Are Moving Faster Because of It",
-    "url": "https://blogs.nvidia.com/blog/ai-semiconductor-fabs/",
-    "published": "2026-11-03",
-    "publisher": "英伟达官方",
-    "bucket": "AI与科技前沿"
-  },
-  {
-    "title": "Cities Worldwide Build and Scale AI Services With NVIDIA Physical and Agentic AI",
-    "url": "https://blogs.nvidia.com/blog/cities-physical-agentic-ai-applications/",
-    "published": "2026-11-03",
-    "publisher": "英伟达官方",
-    "bucket": "AI与科技前沿"
-  },
-  {
-    "title": "Upgraded Sleep Apnea Feature Now Available on Galaxy Ring Following Regulatory Approvals From US FDA and Korea MFDS",
-    "url": "https://news.samsung.com/global/upgraded-sleep-apnea-feature-now-available-on-galaxy-ring-following-regulatory-approvals-from-us-fda-and-korea-mfds",
-    "published": "2026-11-03",
-    "publisher": "三星电子官方",
-    "bucket": "芯片与硬件"
   }
 ]
