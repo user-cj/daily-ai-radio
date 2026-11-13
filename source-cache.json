@@ -1,5 +1,26 @@
 [
   {
+    "title": "海光信息：海光信息技术股份有限公司关于实施部分回购股份注销暨股份变动的公告",
+    "url": "https://static.cninfo.com.cn/finalpage/2026-11-13/1225669706.PDF",
+    "published": "2026-11-13",
+    "publisher": "巨潮资讯披露：海光信息",
+    "bucket": "A股与公司公告"
+  },
+  {
+    "title": "海光信息：海光信息技术股份有限公司关于取得金融机构股票回购专项贷款承诺函的公告",
+    "url": "https://static.cninfo.com.cn/finalpage/2026-11-13/1225669717.PDF",
+    "published": "2026-11-13",
+    "publisher": "巨潮资讯披露：海光信息",
+    "bucket": "A股与公司公告"
+  },
+  {
+    "title": "中际旭创：关于全资子公司参与投资光合叁期基金的公告",
+    "url": "https://static.cninfo.com.cn/finalpage/2026-11-13/1225669449.PDF",
+    "published": "2026-11-13",
+    "publisher": "巨潮资讯披露：中际旭创",
+    "bucket": "A股与公司公告"
+  },
+  {
     "title": "关于公开征求《半导体集成电路 融合视觉传感器测试方法》等46项推荐性国家标准计划项目意见的公示",
     "url": "https://www.miit.gov.cn/gzcy/yjzj/art/2026/art_4e61c7d0c9b540ef9d129e0c71d2fa80.html",
     "published": "2026-11-12",
@@ -75,40 +96,5 @@
     "published": "2026-11-06",
     "publisher": "巨潮资讯披露：海光信息",
     "bucket": "A股与公司公告"
-  },
-  {
-    "title": "海光信息：海光信息技术股份有限公司关于以集中竞价交易方式回购公司股份的回购报告书",
-    "url": "https://static.cninfo.com.cn/finalpage/2026-11-05/1225657671.PDF",
-    "published": "2026-11-05",
-    "publisher": "巨潮资讯披露：海光信息",
-    "bucket": "A股与公司公告"
-  },
-  {
-    "title": "Vera Delivers the Best of Both Worlds: Highest Throughput and Fastest Agents",
-    "url": "https://blogs.nvidia.com/blog/vera-cpu-highest-throughput-fastest-agents/",
-    "published": "2026-11-05",
-    "publisher": "英伟达官方",
-    "bucket": "AI与科技前沿"
-  },
-  {
-    "title": "The Wizard of Open Weights: Chris Alexiuk Makes AI Easy With Open Models",
-    "url": "https://blogs.nvidia.com/blog/nvidia-life-chris-alexiuk/",
-    "published": "2026-11-05",
-    "publisher": "英伟达官方",
-    "bucket": "AI与科技前沿"
-  },
-  {
-    "title": "More Performance From Every Byte: How Full-Stack Codesign Solves AI’s Memory Challenge",
-    "url": "https://blogs.nvidia.com/blog/memory-full-stack-codesign/",
-    "published": "2026-11-05",
-    "publisher": "英伟达官方",
-    "bucket": "芯片与硬件"
-  },
-  {
-    "title": "中国证监会与阿曼金融服务管理局签署《证券期货监管合作谅解备忘录》",
-    "url": "https://www.csrc.gov.cn/csrc/c100028/c7668983/content.shtml",
-    "published": "2026-11-05",
-    "publisher": "中国证监会",
-    "bucket": "A股与政策"
   }
 ]
