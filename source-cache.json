@@ -21,6 +21,13 @@
     "bucket": "A股与公司公告"
   },
   {
+    "title": "How AI Is Helping Care Teams Get Patients the Right Care, Sooner",
+    "url": "https://blogs.nvidia.com/blog/how-ai-is-helping-care-teams/",
+    "published": "2026-11-13",
+    "publisher": "英伟达官方",
+    "bucket": "AI与科技前沿"
+  },
+  {
     "title": "关于公开征求《半导体集成电路 融合视觉传感器测试方法》等46项推荐性国家标准计划项目意见的公示",
     "url": "https://www.miit.gov.cn/gzcy/yjzj/art/2026/art_4e61c7d0c9b540ef9d129e0c71d2fa80.html",
     "published": "2026-11-12",
@@ -82,19 +89,5 @@
     "published": "2026-11-09",
     "publisher": "英伟达官方",
     "bucket": "AI与科技前沿"
-  },
-  {
-    "title": "中际旭创：关于股份回购事项的公告",
-    "url": "https://static.cninfo.com.cn/finalpage/2026-11-06/1225660601.PDF",
-    "published": "2026-11-06",
-    "publisher": "巨潮资讯披露：中际旭创",
-    "bucket": "A股与公司公告"
-  },
-  {
-    "title": "海光信息：海光信息技术股份有限公司关于公司股份回购事项的公告",
-    "url": "https://static.cninfo.com.cn/finalpage/2026-11-06/1225660619.PDF",
-    "published": "2026-11-06",
-    "publisher": "巨潮资讯披露：海光信息",
-    "bucket": "A股与公司公告"
   }
 ]
