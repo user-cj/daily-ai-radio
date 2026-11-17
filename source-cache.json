@@ -14,6 +14,76 @@
     "bucket": "芯片与硬件"
   },
   {
+    "title": "NVIDIA DGX Spark Developer Kit Turns a Desk Into a Supercomputing Lab",
+    "url": "https://blogs.nvidia.com/blog/dgx-spark-hpc-developer-kit-sc26/",
+    "published": "2026-11-16",
+    "publisher": "英伟达官方",
+    "bucket": "芯片与硬件"
+  },
+  {
+    "title": "How the World’s Most Advanced AI Infrastructure Supply Chain Invents the Future",
+    "url": "https://blogs.nvidia.com/blog/ai-infrastructure-supply-chain/",
+    "published": "2026-11-16",
+    "publisher": "英伟达官方",
+    "bucket": "AI与科技前沿"
+  },
+  {
+    "title": "Lambda Boosts AI Factory Resiliency and Efficiency With NVIDIA Photonics",
+    "url": "https://blogs.nvidia.com/blog/lambda-photonics/",
+    "published": "2026-11-16",
+    "publisher": "英伟达官方",
+    "bucket": "AI与科技前沿"
+  },
+  {
+    "title": "NVIDIA Expands Slurm to Bring Quantum Computing Into Supercomputing",
+    "url": "https://blogs.nvidia.com/blog/slurm-quantum-computing-supercomputing/",
+    "published": "2026-11-16",
+    "publisher": "英伟达官方",
+    "bucket": "AI与科技前沿"
+  },
+  {
+    "title": "NVIDIA Sweeps MLPerf Training and Endpoints as Vera Rubin Debuts With Leading Performance",
+    "url": "https://blogs.nvidia.com/blog/mlperf-training-endpoints-vera-rubin/",
+    "published": "2026-11-16",
+    "publisher": "英伟达官方",
+    "bucket": "AI与科技前沿"
+  },
+  {
+    "title": "NVIDIA CUDA-X Libraries Give Agents the Tools to Accelerate Scientific Discovery",
+    "url": "https://blogs.nvidia.com/blog/cuda-x-libraries-agents-accelerate-scientific-discovery/",
+    "published": "2026-11-16",
+    "publisher": "英伟达官方",
+    "bucket": "AI与科技前沿"
+  },
+  {
+    "title": "CUDA at 20: How the Platform Transformed Scientific Computing",
+    "url": "https://blogs.nvidia.com/blog/20-years-cuda/",
+    "published": "2026-11-16",
+    "publisher": "英伟达官方",
+    "bucket": "AI与科技前沿"
+  },
+  {
+    "title": "NVIDIA Announces Rubin HPC — A New GPU to Accelerate Agents for Science, Engineering and Analytics",
+    "url": "https://blogs.nvidia.com/blog/rubin-hpc/",
+    "published": "2026-11-16",
+    "publisher": "英伟达官方",
+    "bucket": "AI与科技前沿"
+  },
+  {
+    "title": "NVIDIA Announces Collaboration With IBM and Fermi National Accelerator Laboratory to Launch Quantum-Classical Codesign Platform, Plus Error-Correction Breakthrough to Advance Practical Quantum Computing",
+    "url": "https://nvidianews.nvidia.com/news/nvidia-announces-collaboration-with-ibm-and-fermi-national-accelerator-laboratory-to-launch-quantum-classical-codesign-platform-plus-error-correction-breakthrough-to-advance-practical-quantum-computing",
+    "published": "2026-11-16",
+    "publisher": "英伟达官方",
+    "bucket": "AI与科技前沿"
+  },
+  {
+    "title": "NVIDIA Introduces Nemotron for Science to Accelerate Discoveries With Agents",
+    "url": "https://nvidianews.nvidia.com/news/nvidia-introduces-nemotron-for-science-to-accelerate-discoveries-with-agents",
+    "published": "2026-11-16",
+    "publisher": "英伟达官方",
+    "bucket": "AI与科技前沿"
+  },
+  {
     "title": "吴清主席在首届中国资本市场学术年会开幕式上的致辞",
     "url": "https://www.csrc.gov.cn/csrc/c106311/c7670983/content.shtml",
     "published": "2026-11-14",
@@ -73,41 +143,6 @@
     "title": "NVIDIA Expands Open Source Commitment With OpenShell Donation and New AI Infrastructure",
     "url": "https://blogs.nvidia.com/blog/open-source-openshell-infrastructure/",
     "published": "2026-11-10",
-    "publisher": "英伟达官方",
-    "bucket": "AI与科技前沿"
-  },
-  {
-    "title": "NVIDIA Announces New Planned Investments in Korean Startups at the MSIT-NVIDIA AI Startup Partnership Forum",
-    "url": "https://blogs.nvidia.com/blog/korean-startup-investments-msit/",
-    "published": "2026-11-09",
-    "publisher": "英伟达官方",
-    "bucket": "AI与科技前沿"
-  },
-  {
-    "title": "Korea Advances Physical AI Across Industries With NVIDIA",
-    "url": "https://blogs.nvidia.com/blog/korea-physical-ai-ecosystem/",
-    "published": "2026-11-09",
-    "publisher": "英伟达官方",
-    "bucket": "AI与科技前沿"
-  },
-  {
-    "title": "Korea’s AI Ecosystem Advances and Secures Agentic AI With NVIDIA",
-    "url": "https://blogs.nvidia.com/blog/korea-secure-agentic-ai/",
-    "published": "2026-11-09",
-    "publisher": "英伟达官方",
-    "bucket": "AI与科技前沿"
-  },
-  {
-    "title": "From Chips to Skills, NVIDIA and Korea Expand Sovereign AI Collaboration",
-    "url": "https://blogs.nvidia.com/blog/korea-sovereign-ai-collaboration/",
-    "published": "2026-11-09",
-    "publisher": "英伟达官方",
-    "bucket": "芯片与硬件"
-  },
-  {
-    "title": "NVIDIA, Rebellions and SK Telecom Announce Collaboration to Advance Sovereign AI Infrastructure With NVIDIA NVLink Fusion",
-    "url": "https://nvidianews.nvidia.com/news/nvidia-rebellions-and-sk-telecom-announce-collaboration-to-advance-sovereign-ai-infrastructure-with-nvidia-nvlink-fusion",
-    "published": "2026-11-09",
     "publisher": "英伟达官方",
     "bucket": "AI与科技前沿"
   }
