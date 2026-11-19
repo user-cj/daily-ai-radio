@@ -7,6 +7,20 @@
     "bucket": "A股与公司公告"
   },
   {
+    "title": "中际旭创：关于收到董事长提议回购公司股份的公告",
+    "url": "https://static.cninfo.com.cn/finalpage/2026-11-18/1225678038.PDF",
+    "published": "2026-11-18",
+    "publisher": "巨潮资讯披露：中际旭创",
+    "bucket": "A股与公司公告"
+  },
+  {
+    "title": "中国电子技术标准化研究院工会第十届会员代表大会第一次会议召开",
+    "url": "https://www.miit.gov.cn/xwfb/gxdt/sjdt/art/2026/art_7b9cc790e3194871add217e64168cb96.html",
+    "published": "2026-11-18",
+    "publisher": "工业和信息化部",
+    "bucket": "芯片与硬件"
+  },
+  {
     "title": "NVIDIA Expands Commitments With Supply Chain Partners to Support AI Infrastructure Buildout",
     "url": "https://nvidianews.nvidia.com/news/nvidia-expands-commitments-with-supply-chain-partners-to-support-ai-infrastructure-buildout",
     "published": "2026-11-17",
@@ -145,12 +159,5 @@
     "published": "2026-11-12",
     "publisher": "工业和信息化部",
     "bucket": "芯片与硬件"
-  },
-  {
-    "title": "How AI Helps Recyclers Turn Mixed Waste Into Reusable Material",
-    "url": "https://blogs.nvidia.com/blog/ai-recycling-startups/",
-    "published": "2026-11-11",
-    "publisher": "英伟达官方",
-    "bucket": "AI与科技前沿"
   }
 ]
