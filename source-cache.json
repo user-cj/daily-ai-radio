@@ -7,6 +7,13 @@
     "bucket": "A股与公司公告"
   },
   {
+    "title": "证券监管部门联合公安机关依法处罚编造传播资本市场虚假信息行为 公布4起典型案例",
+    "url": "https://www.csrc.gov.cn/csrc/c100028/c7671953/content.shtml",
+    "published": "2026-11-20",
+    "publisher": "中国证监会",
+    "bucket": "A股与政策"
+  },
+  {
     "title": "NVIDIA and Microsoft Expand Accelerated Computing From Azure to Windows PCs",
     "url": "https://blogs.nvidia.com/blog/microsoft-ignite-accelerated-computing-azure-windows-pcs/",
     "published": "2026-11-19",
@@ -138,33 +145,5 @@
     "published": "2026-11-14",
     "publisher": "中国证监会",
     "bucket": "A股与政策"
-  },
-  {
-    "title": "海光信息：海光信息技术股份有限公司关于实施部分回购股份注销暨股份变动的公告",
-    "url": "https://static.cninfo.com.cn/finalpage/2026-11-13/1225669706.PDF",
-    "published": "2026-11-13",
-    "publisher": "巨潮资讯披露：海光信息",
-    "bucket": "A股与公司公告"
-  },
-  {
-    "title": "海光信息：海光信息技术股份有限公司关于取得金融机构股票回购专项贷款承诺函的公告",
-    "url": "https://static.cninfo.com.cn/finalpage/2026-11-13/1225669717.PDF",
-    "published": "2026-11-13",
-    "publisher": "巨潮资讯披露：海光信息",
-    "bucket": "A股与公司公告"
-  },
-  {
-    "title": "中际旭创：关于全资子公司参与投资光合叁期基金的公告",
-    "url": "https://static.cninfo.com.cn/finalpage/2026-11-13/1225669449.PDF",
-    "published": "2026-11-13",
-    "publisher": "巨潮资讯披露：中际旭创",
-    "bucket": "A股与公司公告"
-  },
-  {
-    "title": "How AI Is Helping Care Teams Get Patients the Right Care, Sooner",
-    "url": "https://blogs.nvidia.com/blog/how-ai-is-helping-care-teams/",
-    "published": "2026-11-13",
-    "publisher": "英伟达官方",
-    "bucket": "AI与科技前沿"
   }
 ]
