@@ -1,5 +1,19 @@
 [
   {
+    "title": "中际旭创：关于回购公司股份方案的公告",
+    "url": "https://static.cninfo.com.cn/finalpage/2026-11-24/1225685032.PDF",
+    "published": "2026-11-24",
+    "publisher": "巨潮资讯披露：中际旭创",
+    "bucket": "A股与公司公告"
+  },
+  {
+    "title": "工业和信息化部电子信息司组织赴广西、海南调研并召开2026年四季度电子信息制造业发展形势座谈会",
+    "url": "https://www.miit.gov.cn/xwfb/gxdt/sjdt/art/2026/art_7fd8d53eeb5c468983d99a1bee400a00.html",
+    "published": "2026-11-24",
+    "publisher": "工业和信息化部",
+    "bucket": "芯片与硬件"
+  },
+  {
     "title": "海光信息：海光信息技术股份有限公司关于以集中竞价交易方式首次回购股份的公告",
     "url": "https://static.cninfo.com.cn/finalpage/2026-11-20/1225679742.PDF",
     "published": "2026-11-20",
@@ -52,90 +66,6 @@
     "title": "Ian Buck Kicks Off NVIDIA’s Week at SC26 as Science Enters the Age of Agents",
     "url": "https://blogs.nvidia.com/blog/ian-buck-sc26/",
     "published": "2026-11-17",
-    "publisher": "英伟达官方",
-    "bucket": "AI与科技前沿"
-  },
-  {
-    "title": "AI Day Seoul Brings Together Korea’s Industry Leaders, Startups and Developer Communities",
-    "url": "https://blogs.nvidia.com/blog/ai-day-seoul-wrapup/",
-    "published": "2026-11-16",
-    "publisher": "英伟达官方",
-    "bucket": "AI与科技前沿"
-  },
-  {
-    "title": "电器电子产品有害物质限制使用（中国RoHS）信息报送情况（截至2026年10月31日）",
-    "url": "https://www.miit.gov.cn/xwfb/gxdt/sjdt/art/2026/art_98b58d3cfe0a4bdab23c6c06d5b57f15.html",
-    "published": "2026-11-16",
-    "publisher": "工业和信息化部",
-    "bucket": "芯片与硬件"
-  },
-  {
-    "title": "NVIDIA DGX Spark Developer Kit Turns a Desk Into a Supercomputing Lab",
-    "url": "https://blogs.nvidia.com/blog/dgx-spark-hpc-developer-kit-sc26/",
-    "published": "2026-11-16",
-    "publisher": "英伟达官方",
-    "bucket": "芯片与硬件"
-  },
-  {
-    "title": "How the World’s Most Advanced AI Infrastructure Supply Chain Invents the Future",
-    "url": "https://blogs.nvidia.com/blog/ai-infrastructure-supply-chain/",
-    "published": "2026-11-16",
-    "publisher": "英伟达官方",
-    "bucket": "AI与科技前沿"
-  },
-  {
-    "title": "Lambda Boosts AI Factory Resiliency and Efficiency With NVIDIA Photonics",
-    "url": "https://blogs.nvidia.com/blog/lambda-photonics/",
-    "published": "2026-11-16",
-    "publisher": "英伟达官方",
-    "bucket": "AI与科技前沿"
-  },
-  {
-    "title": "NVIDIA Expands Slurm to Bring Quantum Computing Into Supercomputing",
-    "url": "https://blogs.nvidia.com/blog/slurm-quantum-computing-supercomputing/",
-    "published": "2026-11-16",
-    "publisher": "英伟达官方",
-    "bucket": "AI与科技前沿"
-  },
-  {
-    "title": "NVIDIA Sweeps MLPerf Training and Endpoints as Vera Rubin Debuts With Leading Performance",
-    "url": "https://blogs.nvidia.com/blog/mlperf-training-endpoints-vera-rubin/",
-    "published": "2026-11-16",
-    "publisher": "英伟达官方",
-    "bucket": "AI与科技前沿"
-  },
-  {
-    "title": "NVIDIA CUDA-X Libraries Give Agents the Tools to Accelerate Scientific Discovery",
-    "url": "https://blogs.nvidia.com/blog/cuda-x-libraries-agents-accelerate-scientific-discovery/",
-    "published": "2026-11-16",
-    "publisher": "英伟达官方",
-    "bucket": "AI与科技前沿"
-  },
-  {
-    "title": "CUDA at 20: How the Platform Transformed Scientific Computing",
-    "url": "https://blogs.nvidia.com/blog/20-years-cuda/",
-    "published": "2026-11-16",
-    "publisher": "英伟达官方",
-    "bucket": "AI与科技前沿"
-  },
-  {
-    "title": "NVIDIA Announces Rubin HPC — A New GPU to Accelerate Agents for Science, Engineering and Analytics",
-    "url": "https://blogs.nvidia.com/blog/rubin-hpc/",
-    "published": "2026-11-16",
-    "publisher": "英伟达官方",
-    "bucket": "AI与科技前沿"
-  },
-  {
-    "title": "NVIDIA Announces Collaboration With IBM and Fermi National Accelerator Laboratory to Launch Quantum-Classical Codesign Platform, Plus Error-Correction Breakthrough to Advance Practical Quantum Computing",
-    "url": "https://nvidianews.nvidia.com/news/nvidia-announces-collaboration-with-ibm-and-fermi-national-accelerator-laboratory-to-launch-quantum-classical-codesign-platform-plus-error-correction-breakthrough-to-advance-practical-quantum-computing",
-    "published": "2026-11-16",
-    "publisher": "英伟达官方",
-    "bucket": "AI与科技前沿"
-  },
-  {
-    "title": "NVIDIA Introduces Nemotron for Science to Accelerate Discoveries With Agents",
-    "url": "https://nvidianews.nvidia.com/news/nvidia-introduces-nemotron-for-science-to-accelerate-discoveries-with-agents",
-    "published": "2026-11-16",
     "publisher": "英伟达官方",
     "bucket": "AI与科技前沿"
   }
